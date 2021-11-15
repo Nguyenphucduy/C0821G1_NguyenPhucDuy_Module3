@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: localhost    Database: quanlydiemthi
+-- Host: localhost    Database: quan_ly_diem_thi
 -- ------------------------------------------------------
 -- Server version	8.0.27
 
@@ -16,107 +16,107 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `bangdiem`
+-- Table structure for table `bang_diem`
 --
 
-DROP TABLE IF EXISTS `bangdiem`;
+DROP TABLE IF EXISTS `bang_diem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bangdiem` (
-  `MaHS` varchar(20) NOT NULL,
-  `MaMH` varchar(20) NOT NULL,
-  `DiemThi` int DEFAULT NULL,
-  `NgayKT` datetime DEFAULT NULL,
-  PRIMARY KEY (`MaHS`,`MaMH`),
-  KEY `MaMH` (`MaMH`),
-  CONSTRAINT `bangdiem_ibfk_1` FOREIGN KEY (`MaHS`) REFERENCES `hocsinh` (`MaHS`),
-  CONSTRAINT `bangdiem_ibfk_2` FOREIGN KEY (`MaMH`) REFERENCES `monhoc` (`MaMH`)
+CREATE TABLE `bang_diem` (
+  `ma_hs` varchar(20) NOT NULL,
+  `ma_mh` varchar(20) NOT NULL,
+  `diem_thi` int DEFAULT NULL,
+  `ngay_kt` datetime DEFAULT NULL,
+  PRIMARY KEY (`ma_hs`,`ma_mh`),
+  KEY `ma_mh` (`ma_mh`),
+  CONSTRAINT `bang_diem_ibfk_1` FOREIGN KEY (`ma_hs`) REFERENCES `hoc_sinh` (`ma_hs`),
+  CONSTRAINT `bang_diem_ibfk_2` FOREIGN KEY (`ma_mh`) REFERENCES `mon_hoc` (`ma_mh`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bangdiem`
+-- Dumping data for table `bang_diem`
 --
 
-LOCK TABLES `bangdiem` WRITE;
-/*!40000 ALTER TABLE `bangdiem` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bangdiem` ENABLE KEYS */;
+LOCK TABLES `bang_diem` WRITE;
+/*!40000 ALTER TABLE `bang_diem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bang_diem` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `giaovien`
+-- Table structure for table `giao_vien`
 --
 
-DROP TABLE IF EXISTS `giaovien`;
+DROP TABLE IF EXISTS `giao_vien`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `giaovien` (
-  `MaGV` varchar(20) NOT NULL,
-  `TenGV` varchar(20) DEFAULT NULL,
-  `SDT` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`MaGV`)
+CREATE TABLE `giao_vien` (
+  `ma_gv` varchar(20) NOT NULL,
+  `ten_gv` varchar(20) DEFAULT NULL,
+  `sdt` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`ma_gv`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `giaovien`
+-- Dumping data for table `giao_vien`
 --
 
-LOCK TABLES `giaovien` WRITE;
-/*!40000 ALTER TABLE `giaovien` DISABLE KEYS */;
-/*!40000 ALTER TABLE `giaovien` ENABLE KEYS */;
+LOCK TABLES `giao_vien` WRITE;
+/*!40000 ALTER TABLE `giao_vien` DISABLE KEYS */;
+/*!40000 ALTER TABLE `giao_vien` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `hocsinh`
+-- Table structure for table `hoc_sinh`
 --
 
-DROP TABLE IF EXISTS `hocsinh`;
+DROP TABLE IF EXISTS `hoc_sinh`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `hocsinh` (
-  `MaHS` varchar(20) NOT NULL,
-  `TenHS` varchar(50) DEFAULT NULL,
-  `NgaySinh` datetime DEFAULT NULL,
-  `Lop` varchar(20) DEFAULT NULL,
-  `GT` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`MaHS`)
+CREATE TABLE `hoc_sinh` (
+  `ma_hs` varchar(20) NOT NULL,
+  `ten_hs` varchar(50) DEFAULT NULL,
+  `ngay_sinh` datetime DEFAULT NULL,
+  `lop` varchar(20) DEFAULT NULL,
+  `gt` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ma_hs`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `hocsinh`
+-- Dumping data for table `hoc_sinh`
 --
 
-LOCK TABLES `hocsinh` WRITE;
-/*!40000 ALTER TABLE `hocsinh` DISABLE KEYS */;
-/*!40000 ALTER TABLE `hocsinh` ENABLE KEYS */;
+LOCK TABLES `hoc_sinh` WRITE;
+/*!40000 ALTER TABLE `hoc_sinh` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hoc_sinh` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `monhoc`
+-- Table structure for table `mon_hoc`
 --
 
-DROP TABLE IF EXISTS `monhoc`;
+DROP TABLE IF EXISTS `mon_hoc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `monhoc` (
-  `MaMH` varchar(20) NOT NULL,
-  `TenMH` varchar(50) DEFAULT NULL,
-  `MaGV` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`MaMH`),
-  KEY `FK_MaGV` (`MaGV`),
-  CONSTRAINT `FK_MaGV` FOREIGN KEY (`MaGV`) REFERENCES `giaovien` (`MaGV`)
+CREATE TABLE `mon_hoc` (
+  `ma_mh` varchar(20) NOT NULL,
+  `ten_mh` varchar(50) DEFAULT NULL,
+  `ma_gv` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ma_mh`),
+  KEY `fk_ma_gv` (`ma_gv`),
+  CONSTRAINT `fk_ma_gv` FOREIGN KEY (`ma_gv`) REFERENCES `giao_vien` (`ma_gv`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `monhoc`
+-- Dumping data for table `mon_hoc`
 --
 
-LOCK TABLES `monhoc` WRITE;
-/*!40000 ALTER TABLE `monhoc` DISABLE KEYS */;
-/*!40000 ALTER TABLE `monhoc` ENABLE KEYS */;
+LOCK TABLES `mon_hoc` WRITE;
+/*!40000 ALTER TABLE `mon_hoc` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mon_hoc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -128,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-14 11:27:23
+-- Dump completed on 2021-11-15 21:16:46

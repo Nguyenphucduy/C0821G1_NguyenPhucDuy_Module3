@@ -1,30 +1,30 @@
-CREATE DATABASE QuanLyDiemThi;
-USE QuanLyDiemThi;
-CREATE TABLE HocSinh(
-    MaHS VARCHAR(20) PRIMARY KEY,
-    TenHS VARCHAR(50),
-    NgaySinh DATETIME,
-    Lop VARCHAR(20),
-    GT VARCHAR(20)
+CREATE DATABASE quan_ly_diem_thi;
+USE quan_ly_diem_thi;
+CREATE TABLE hoc_sinh(
+    ma_hs VARCHAR(20) PRIMARY KEY,
+    ten_hs VARCHAR(50),
+    ngay_sinh DATETIME,
+    lop VARCHAR(20),
+    gt VARCHAR(20)
 );
-CREATE TABLE MonHoc(
-    MaMH VARCHAR(20) PRIMARY KEY,
-    TenMH VARCHAR(50)
+CREATE TABLE mon_hoc(
+    ma_mh VARCHAR(20) PRIMARY KEY,
+    ten_mh VARCHAR(50)
 );
-CREATE TABLE BangDiem(
-    MaHS VARCHAR(20),
-    MaMH VARCHAR(20),
-    DiemThi INT,
-    NgayKT DATETIME,
-    PRIMARY KEY (MaHS, MaMH),
-    FOREIGN KEY (MaHS) REFERENCES HocSinh(MaHS),
-    FOREIGN KEY (MaMH) REFERENCES MonHoc(MaMH)
+CREATE TABLE bang_diem(
+    ma_hs VARCHAR(20),
+    ma_mh VARCHAR(20),
+    diem_thi INT,
+    ngay_kt DATETIME,
+    PRIMARY KEY (ma_hs, ma_mh),
+    FOREIGN KEY (ma_hs) REFERENCES hoc_sinh(ma_hs),
+    FOREIGN KEY (ma_mh) REFERENCES mon_hoc(ma_mh)
 );
 
-CREATE TABLE GiaoVien(
-    MaGV VARCHAR(20) PRIMARY KEY,
-    TenGV VARCHAR(20),
-    SDT VARCHAR(10)
+CREATE TABLE giao_vien(
+    ma_gv VARCHAR(20) PRIMARY KEY,
+    ten_gv VARCHAR(20),
+    sdt VARCHAR(10)
 );
-ALTER TABLE MonHoc ADD MaGV VARCHAR(20);
-ALTER TABLE MonHoc ADD CONSTRAINT FK_MaGV FOREIGN KEY (MaGV) REFERENCES GiaoVien(MaGV);
+ALTER TABLE mon_hoc ADD ma_gv VARCHAR(20);
+ALTER TABLE mon_hoc ADD CONSTRAINT fk_ma_gv FOREIGN KEY (ma_gv) REFERENCES giao_vien(ma_gv);
