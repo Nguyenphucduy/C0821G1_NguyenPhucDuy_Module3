@@ -24,8 +24,9 @@ DROP TABLE IF EXISTS `bo_phan`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bo_phan` (
   `id_bo_phan` int NOT NULL,
-  `ten_bo_phan` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_bo_phan`)
+  `ten_bo_phan` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_bo_phan`),
+  UNIQUE KEY `id_bo_phan` (`id_bo_phan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -47,14 +48,15 @@ DROP TABLE IF EXISTS `dich_vu`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dich_vu` (
   `id_dich_vu` int NOT NULL,
-  `ten_dich_vu` varchar(50) DEFAULT NULL,
-  `so_tang` int DEFAULT NULL,
-  `so_nguoi_toi_da` int DEFAULT NULL,
-  `chi_phi_thue` double DEFAULT NULL,
+  `ten_dich_vu` varchar(50) NOT NULL,
+  `so_tang` int NOT NULL,
+  `so_nguoi_toi_da` int NOT NULL,
+  `chi_phi_thue` double NOT NULL,
   `trang_thai` tinyint(1) DEFAULT NULL,
-  `id_kieu_thue` int DEFAULT NULL,
-  `id_loai_dich_vu` int DEFAULT NULL,
+  `id_kieu_thue` int NOT NULL,
+  `id_loai_dich_vu` int NOT NULL,
   PRIMARY KEY (`id_dich_vu`),
+  UNIQUE KEY `id_dich_vu` (`id_dich_vu`),
   KEY `id_kieu_thue` (`id_kieu_thue`),
   KEY `id_loai_dich_vu` (`id_loai_dich_vu`),
   CONSTRAINT `dich_vu_ibfk_1` FOREIGN KEY (`id_kieu_thue`) REFERENCES `kieu_thue` (`id_kieu_thue`),
@@ -80,11 +82,12 @@ DROP TABLE IF EXISTS `dich_vu_di_kem`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dich_vu_di_kem` (
   `id_dich_vu_di_kem` int NOT NULL,
-  `ten_dich_vu_di_kem` varchar(50) DEFAULT NULL,
-  `gia` double DEFAULT NULL,
-  `don_vi` varchar(10) DEFAULT NULL,
+  `ten_dich_vu_di_kem` varchar(50) NOT NULL,
+  `gia` double NOT NULL,
+  `don_vi` varchar(10) NOT NULL,
   `trang_thai_kha_dung` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id_dich_vu_di_kem`)
+  PRIMARY KEY (`id_dich_vu_di_kem`),
+  UNIQUE KEY `id_dich_vu_di_kem` (`id_dich_vu_di_kem`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -106,14 +109,15 @@ DROP TABLE IF EXISTS `hop_dong`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hop_dong` (
   `id_hop_dong` int NOT NULL,
-  `ngay_lam_hop_dong` date DEFAULT NULL,
-  `ngay_ket_thuc` date DEFAULT NULL,
-  `tien_dat_coc` double DEFAULT NULL,
-  `tong_tien` double DEFAULT NULL,
-  `id_nhan_vien` int DEFAULT NULL,
-  `id_khach_hang` int DEFAULT NULL,
-  `id_dich_vu` int DEFAULT NULL,
+  `ngay_lam_hop_dong` date NOT NULL,
+  `ngay_ket_thuc` date NOT NULL,
+  `tien_dat_coc` double NOT NULL,
+  `tong_tien` double NOT NULL,
+  `id_nhan_vien` int NOT NULL,
+  `id_khach_hang` int NOT NULL,
+  `id_dich_vu` int NOT NULL,
   PRIMARY KEY (`id_hop_dong`),
+  UNIQUE KEY `id_hop_dong` (`id_hop_dong`),
   KEY `id_nhan_vien` (`id_nhan_vien`),
   KEY `id_khach_hang` (`id_khach_hang`),
   KEY `id_dich_vu` (`id_dich_vu`),
@@ -141,9 +145,11 @@ DROP TABLE IF EXISTS `hop_dong_chi_tiet`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hop_dong_chi_tiet` (
   `id_hop_dong_chi_tiet` int NOT NULL,
-  `id_hop_dong` int DEFAULT NULL,
-  `id_dich_vu_di_kem` int DEFAULT NULL,
+  `id_hop_dong` int NOT NULL,
+  `id_dich_vu_di_kem` int NOT NULL,
+  `so_luong` int NOT NULL,
   PRIMARY KEY (`id_hop_dong_chi_tiet`),
+  UNIQUE KEY `id_hop_dong_chi_tiet` (`id_hop_dong_chi_tiet`),
   KEY `id_hop_dong` (`id_hop_dong`),
   KEY `id_dich_vu_di_kem` (`id_dich_vu_di_kem`),
   CONSTRAINT `hop_dong_chi_tiet_ibfk_1` FOREIGN KEY (`id_hop_dong`) REFERENCES `hop_dong` (`id_hop_dong`),
@@ -169,14 +175,15 @@ DROP TABLE IF EXISTS `khach_hang`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `khach_hang` (
   `id_khach_hang` int NOT NULL,
-  `ho_ten` varchar(50) DEFAULT NULL,
-  `ngay_sinh` date DEFAULT NULL,
-  `so_cmnd` int DEFAULT NULL,
-  `sdt` int DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `dia_chi` varchar(50) DEFAULT NULL,
-  `id_loai_khach` int DEFAULT NULL,
+  `ho_ten` varchar(50) NOT NULL,
+  `ngay_sinh` date NOT NULL,
+  `so_cmnd` int NOT NULL,
+  `sdt` int NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `dia_chi` varchar(50) NOT NULL,
+  `id_loai_khach` int NOT NULL,
   PRIMARY KEY (`id_khach_hang`),
+  UNIQUE KEY `id_khach_hang` (`id_khach_hang`),
   KEY `id_loai_khach` (`id_loai_khach`),
   CONSTRAINT `khach_hang_ibfk_1` FOREIGN KEY (`id_loai_khach`) REFERENCES `loai_khach` (`id_loai_khach`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -200,9 +207,10 @@ DROP TABLE IF EXISTS `kieu_thue`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `kieu_thue` (
   `id_kieu_thue` int NOT NULL,
-  `ten_kieu_thue` varchar(50) DEFAULT NULL,
-  `gia_thue` double DEFAULT NULL,
-  PRIMARY KEY (`id_kieu_thue`)
+  `ten_kieu_thue` varchar(50) NOT NULL,
+  `gia_thue` double NOT NULL,
+  PRIMARY KEY (`id_kieu_thue`),
+  UNIQUE KEY `id_kieu_thue` (`id_kieu_thue`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -224,8 +232,9 @@ DROP TABLE IF EXISTS `loai_dich_vu`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `loai_dich_vu` (
   `id_loai_dich_vu` int NOT NULL,
-  `ten_loai_dich_vu` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_loai_dich_vu`)
+  `ten_loai_dich_vu` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_loai_dich_vu`),
+  UNIQUE KEY `id_loai_dich_vu` (`id_loai_dich_vu`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -247,8 +256,9 @@ DROP TABLE IF EXISTS `loai_khach`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `loai_khach` (
   `id_loai_khach` int NOT NULL,
-  `ten_loai_khachn` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_loai_khach`)
+  `ten_loai_khachn` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_loai_khach`),
+  UNIQUE KEY `id_loai_khach` (`id_loai_khach`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -270,17 +280,18 @@ DROP TABLE IF EXISTS `nhan_vien`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nhan_vien` (
   `id_nhan_vien` int NOT NULL,
-  `ho_ten` varchar(50) DEFAULT NULL,
-  `ngay_sinh` date DEFAULT NULL,
-  `so_cmnd` int DEFAULT NULL,
-  `luong` double DEFAULT NULL,
-  `sdt` int DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `dia_chi` varchar(50) DEFAULT NULL,
-  `id_vi_tri` int DEFAULT NULL,
-  `id_trinh_do` int DEFAULT NULL,
-  `id_bo_phan` int DEFAULT NULL,
+  `ho_ten` varchar(50) NOT NULL,
+  `ngay_sinh` date NOT NULL,
+  `so_cmnd` int NOT NULL,
+  `luong` double NOT NULL,
+  `sdt` int NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `dia_chi` varchar(50) NOT NULL,
+  `id_vi_tri` int NOT NULL,
+  `id_trinh_do` int NOT NULL,
+  `id_bo_phan` int NOT NULL,
   PRIMARY KEY (`id_nhan_vien`),
+  UNIQUE KEY `id_nhan_vien` (`id_nhan_vien`),
   KEY `id_vi_tri` (`id_vi_tri`),
   KEY `id_trinh_do` (`id_trinh_do`),
   KEY `id_bo_phan` (`id_bo_phan`),
@@ -308,8 +319,9 @@ DROP TABLE IF EXISTS `trinh_do`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `trinh_do` (
   `id_trinh_do` int NOT NULL,
-  `name_trinh_do` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_trinh_do`)
+  `name_trinh_do` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_trinh_do`),
+  UNIQUE KEY `id_trinh_do` (`id_trinh_do`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -331,8 +343,9 @@ DROP TABLE IF EXISTS `vi_tri`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vi_tri` (
   `id_vi_tri` int NOT NULL,
-  `ten_vi_tri` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_vi_tri`)
+  `ten_vi_tri` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_vi_tri`),
+  UNIQUE KEY `id_vi_tri` (`id_vi_tri`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -354,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-15 16:42:49
+-- Dump completed on 2021-11-16  8:17:55
