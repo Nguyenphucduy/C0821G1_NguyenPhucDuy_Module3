@@ -9,7 +9,7 @@ WHERE `status` = true;
 
 #Hiển thị danh sách các môn học có thời gian học nhỏ hơn 10 giờ.
 SELECT *
-FROM `subject`
+FROM `subject`markmark
 WHERE credit < 10;
 
 #Hiển thị danh sách học viên lớp A1

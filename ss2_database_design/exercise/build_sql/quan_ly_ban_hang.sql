@@ -24,9 +24,10 @@ DROP TABLE IF EXISTS `customer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
   `c_id` int NOT NULL,
-  `c_name` varchar(50) DEFAULT NULL,
-  `c_age` int DEFAULT NULL,
-  PRIMARY KEY (`c_id`)
+  `c_name` varchar(50) NOT NULL,
+  `c_age` int NOT NULL,
+  PRIMARY KEY (`c_id`),
+  UNIQUE KEY `c_id` (`c_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -48,10 +49,11 @@ DROP TABLE IF EXISTS `order`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order` (
   `o_id` int NOT NULL,
-  `c_id` int DEFAULT NULL,
-  `o_date` date DEFAULT NULL,
-  `o_total_price` double DEFAULT NULL,
+  `c_id` int NOT NULL,
+  `o_date` date NOT NULL,
+  `o_total_price` double NOT NULL,
   PRIMARY KEY (`o_id`),
+  UNIQUE KEY `o_id` (`o_id`),
   KEY `c_id` (`c_id`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -78,7 +80,8 @@ CREATE TABLE `order_detail` (
   `p_id` int NOT NULL,
   `od_qty` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`o_id`,`p_id`),
-  KEY `p_id` (`p_id`),
+  UNIQUE KEY `o_id` (`o_id`),
+  UNIQUE KEY `p_id` (`p_id`),
   CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`o_id`) REFERENCES `order` (`o_id`),
   CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `product` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -102,9 +105,10 @@ DROP TABLE IF EXISTS `product`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
   `p_id` int NOT NULL,
-  `p_name` varchar(50) DEFAULT NULL,
-  `p_price` double DEFAULT NULL,
-  PRIMARY KEY (`p_id`)
+  `p_name` varchar(50) NOT NULL,
+  `p_price` double NOT NULL,
+  PRIMARY KEY (`p_id`),
+  UNIQUE KEY `p_id` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,4 +130,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-15 14:24:57
+-- Dump completed on 2021-11-16 11:09:19
