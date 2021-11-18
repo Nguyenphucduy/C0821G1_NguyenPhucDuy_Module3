@@ -51,7 +51,13 @@ from customer c
 inner join product p on c.c_id = p.p_id;
 
 -- Hiển thị tên những khách hàng không mua bất kỳ một sản phẩm nào
--- chưa làm được
+select *
+from customer c
+where not exists (
+	select *
+	from `order` o
+    where c.c_id = o.o_id
+);
 
 -- Hiển thị mã hóa đơn, ngày bán và giá tiền của từng hóa đơn 
 -- (giá một hóa đơn được tính bằng tổng giá bán của từng loại mặt hàng xuất hiện trong hóa đơn.
