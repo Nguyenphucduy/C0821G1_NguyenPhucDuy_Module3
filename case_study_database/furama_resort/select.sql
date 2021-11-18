@@ -85,14 +85,14 @@ select dich_vu.chi_phi_thue + sum(hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue)
 end;
 // delimiter ;
  call thong_ke(1,2019);
- --  chưa làm được đoạn này
+ --  chưa làm được 11 tháng còn lại
 
  
  -- 10 ma_hop_dong, ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc, so_luong_dich_vu_di_kem
  select h.id_hop_dong,h.ngay_lam_hop_dong,h.ngay_ket_thuc,h.tien_dat_coc,sum(hd.so_luong) as tong_so_luong
  from hop_dong h 
  join hop_dong_chi_tiet hd on h.id_hop_dong = hd.id_hop_dong
- group by hd.so_luong;
+ group by h.id_hop_dong;
 -- join dich_vu_di_kem dv on hd.id_dich_vu_di_kem = dv.id_dich_vu_di_kem;
  -- 11.	Hiển thị thông tin các dịch vụ đi kèm đã được sử dụng bởi những khách hàng có ten_loai_khach là “Diamond”
  -- và có dia_chi ở “Vinh” hoặc “Quảng Ngãi”.
