@@ -62,6 +62,8 @@ where not exists (
 -- Hiển thị mã hóa đơn, ngày bán và giá tiền của từng hóa đơn 
 -- (giá một hóa đơn được tính bằng tổng giá bán của từng loại mặt hàng xuất hiện trong hóa đơn.
 --  Giá bán của từng loại được tính = odQTY*pPrice)
-select o_id,o_date,o_total_price
-from `order`;
--- chưa làm được
+select `order`.o_id,`order`.o_date, sum(order_detail.od_qty*product.p_price) as tong_tien
+from `order`
+join order_detail on `order`.o_id= order_detail.o_id
+join product on order_detail.p_id= product.p_id;
+

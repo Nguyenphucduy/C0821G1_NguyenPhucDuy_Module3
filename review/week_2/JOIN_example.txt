@@ -1,0 +1,25 @@
+Table A
+1
+2
+3
+
+Table B
+2
+1
+1
+4
+5
+
+A full join B on A... = B...
+=> Đông: 1 1 2 3 4 5
+A right join B on A... = B...
+=> Công: 1 1 2 4 5
+B left join A on A... = B...
+=> Duy: 1 1 2 4 5
+B right join A on A... = B...
+=> Bảo: 1 1 2 3
+A left join B on A... = B...
+=> Bảo: 1 1 2 3
+A inner join B on A... = B...
+=> Dự: 1 1 2
+
