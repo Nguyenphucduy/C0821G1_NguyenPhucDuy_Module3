@@ -1,38 +1,38 @@
-drop database if exists quan_ly_ban_hang;
+drop database if exists manager_sell;
 
-create database quan_ly_ban_hang;
+create database manager_sell;
 
-use quan_ly_ban_hang;
+use manager_sell;
 
 create table customer (
-c_id int not null unique primary key,
-c_name varchar (50) not null,
-c_age int not null
+customer_id int not null unique primary key,
+customer_name varchar (50) not null,
+customer_age int not null
 );
 
 
 create table `order` (
-o_id int not null unique primary key,
-c_id int not null,
-o_date date not null,
-o_total_price double,
-foreign key (c_id) references customer (c_id)
+order_id int not null unique primary key,
+customer_id int not null,
+order_date date not null,
+order_total_price double,
+foreign key (customer_id) references customer (customer_id)
 );
 
 create table product (
-p_id int not null unique primary key,
-p_name varchar (50) not null,
-p_price double not null
+product_id int not null unique primary key,
+product_name varchar (50) not null,
+product_price double not null
 );
 
 
 create table order_detail (
-o_id int not null ,
-p_id int not null ,
+order_id int not null ,
+product_id int not null ,
 od_qty varchar (60),
-primary key(o_id,p_id),
-foreign key (o_id) references `order` (o_id),
-foreign key (p_id) references product (p_id)
+primary key(order_id,product_id),
+foreign key (order_id) references `order` (order_id),
+foreign key (product_id) references product (product_id)
 );
 
 
