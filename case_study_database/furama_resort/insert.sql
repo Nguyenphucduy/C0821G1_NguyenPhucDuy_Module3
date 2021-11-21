@@ -34,6 +34,8 @@ values
 (6,'Ngoc Du','1997/03/11',123456785,55500,0335773631,'NgocDu@gmail.com','quang ninh',2,2,2),
 (7,'Van Dong','1997/03/12',123456789,7700,0335773637,'VanDong@gmail.com','quang nam',3,3,3),
 (8,'Nhat Anh','1997/03/13',123456789,5000,0335773638,'NhatAnh@gmail.com','quang binh',4,4,4);
+insert into nhan_vien
+values(9,'Nhat Anh','1997/03/13',123456789,5000,0335773638,'NhatAnh@gmail.com','quang binh',4,4,4);
 -- insert loai khach hang 
 insert into loai_khach
 values 
@@ -54,8 +56,7 @@ values
 (7,'Van Dong','1997/03/12',123456789,0335773637,'VanDong@gmail.com','quang nam',2),
 (8,'Nhat Anh','1997/03/13',123456789,0335773638,'NhatAnh@gmail.com','quang binh',3);
 insert into khach_hang
-values 
-(9,'Phuc Duy','1997/03/06',123456789,0335773636,'phucduy@gmail.com','quang ninh',1);
+values (33,'Nhat Anh','1997/03/13',123456789,0335773638,'NhatAnh@gmail.com','quang binh',3);
 
 
 -- insert loai dich vu
@@ -90,6 +91,14 @@ values
 (6,3,6,4,4000,80,'1star',null,null,false,2,1),
 (7,1,7,3,7700,90,'2star',null,null,false,3,2),
 (8,2,8,2,5000,100,'5star',20,null,false,4,3);
+-- test task 7
+insert into dich_vu
+values (11,2,8,2,5000,100,'5star',20,null,false,4,3);
+-- test task 12
+insert into dich_vu
+values (12,2,8,2,5000,100,'5star',20,null,false,4,3);
+insert into dich_vu
+values (13,2,8,2,5000,100,'5star',20,null,false,4,3);
 
 -- insert hop dong
 insert into hop_dong
@@ -103,13 +112,9 @@ values
 (7,'2019/04/12','2020/03/13',7000,7,2,1),
 (8,'2019/05/13','2020/03/14',8000,8,1,2);
 insert into hop_dong
-values 
-(9,'2019/10/13','2020/03/14',8000,8,1,2),
-(10,'2019/11/13','2020/03/14',8000,8,1,2);
+values(11,'2016/05/13','2020/03/14',8000,9,1,2);
 insert into hop_dong
-values 
-(13,'2019/10/13','2020/03/14',8000,1,8,2),
-(14,'2019/11/13','2020/03/14',8000,2,7,3);
+values(100,'2015/05/13','2020/03/14',8000,1,33,2);
 
 -- insert dich vu di kem
 insert into dich_vu_di_kem
