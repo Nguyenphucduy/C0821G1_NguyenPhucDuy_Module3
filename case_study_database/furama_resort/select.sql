@@ -34,7 +34,7 @@ order by id_dich_vu;
 
 -- 5 .IDKhachHang, HoTen, TenLoaiKhach, IDHopDong, TenDichVu, NgayLamHopDong, NgayKetThuc, TongTien 
 select khach_hang.id_khach_hang,khach_hang.ho_ten,loai_khach.ten_loai_khach,hop_dong.id_hop_dong,ten_dich_vu.ten_dich_vu,hop_dong.ngay_lam_hop_dong,hop_dong.ngay_ket_thuc,
-dich_vu.chi_phi_thue + sum(hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue) as tong_tien
+sum((hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue) + dich_vu.chi_phi_thue) as tong_tien
 from khach_hang
 join loai_khach on khach_hang.id_loai_khach = loai_khach.id_loai_khach
 left join hop_dong on khach_hang.id_khach_hang = hop_dong.id_khach_hang
@@ -94,7 +94,7 @@ order by dich_vu.id_dich_vu;
  from khach_hang;
 
  -- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2019 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng
-select hop_dong.id_hop_dong,hop_dong.ngay_lam_hop_dong,hop_dong.id_khach_hang,dich_vu.chi_phi_thue + sum(hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue) as tong_tien
+select hop_dong.id_hop_dong,hop_dong.ngay_lam_hop_dong,hop_dong.id_khach_hang,sum((hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue) + dich_vu.chi_phi_thue) as tong_tien
  from hop_dong
  join dich_vu on hop_dong.id_dich_vu =  dich_vu.id_dich_vu
  join hop_dong_chi_tiet on hop_dong.id_hop_dong =  hop_dong_chi_tiet.id_hop_dong
@@ -110,7 +110,7 @@ select hop_dong.id_hop_dong,hop_dong.ngay_lam_hop_dong,hop_dong.id_khach_hang,di
  delimiter //
 create procedure thong_ke(thang int,nam int)
 begin
-select dich_vu.chi_phi_thue + sum(hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue) as tong_tien
+select  sum((hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue) + dich_vu.chi_phi_thue) as tong_tien
  from hop_dong
  join dich_vu on hop_dong.id_dich_vu =  dich_vu.id_dich_vu
  join hop_dong_chi_tiet on hop_dong.id_hop_dong =  hop_dong_chi_tiet.id_hop_dong
@@ -126,7 +126,7 @@ call thong_ke(3,2019);
 call thong_ke(4,2019);
 call thong_ke(5,2019);
  -- cách 3
- select month(hop_dong.ngay_lam_hop_dong) as thang_lam_hop_dong, dich_vu.chi_phi_thue + sum(hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue) as tong_tien, count(*) as so_lan_booking
+ select month(hop_dong.ngay_lam_hop_dong) as thang_lam_hop_dong, sum((hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue) + dich_vu.chi_phi_thue) as 'tổng tiền', count(*) as so_lan_booking
 from hop_dong
 join dich_vu on hop_dong.id_dich_vu =  dich_vu.id_dich_vu
  join hop_dong_chi_tiet on hop_dong.id_hop_dong =  hop_dong_chi_tiet.id_hop_dong
@@ -235,11 +235,12 @@ from nhan_vien;
 
  -- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, 
  -- chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2019 là lớn hơn 10.000.000 VNĐ.
-SET SQL_SAFE_UPDATES = 0;
-UPDATE khach_hang
-SET id_loai_khach = 2
-WHERE id_loai_khach = 1 and id_loai_khach in (
-select loai_khach.id_loai_khach
+
+
+drop view loai_khach_view;
+
+create view loai_khach_view as 
+select khach_hang.id_khach_hang,khach_hang.id_loai_khach
 from khach_hang
 join loai_khach on loai_khach.id_loai_khach= khach_hang.id_loai_khach
 join hop_dong on khach_hang.id_khach_hang = hop_dong.id_khach_hang
@@ -248,10 +249,20 @@ join dich_vu on hop_dong.id_dich_vu = dich_vu.id_dich_vu
 join kieu_thue on dich_vu.id_kieu_thue = kieu_thue.id_kieu_thue
 where year(hop_dong.ngay_lam_hop_dong) = 2019
 group by hop_dong.id_hop_dong
-having  sum(hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue) >= 100);
+having   sum((hop_dong_chi_tiet.so_luong*kieu_thue.gia_thue) + dich_vu.chi_phi_thue) >= 100 ;
+
+SET SQL_SAFE_UPDATES = 0;
+update khach_hang
+-- phải  join với bản mình cần update mới update được từ view
+inner join loai_khach_view on khach_hang.id_khach_hang = loai_khach_view.id_khach_hang
+set khach_hang.id_loai_khach = 2 ;
 SET SQL_SAFE_UPDATES = 1;
--- 1093 !!!
--- SET optimizer_switch = 'derived_merge=off';
+
+
+
+select *
+from loai_khach_view;
+
  -- 18.	Xóa những khách hàng có hợp đồng trước năm 2016 (chú ý ràng buộc giữa các bảng).
  SET FOREIGN_KEY_CHECKS = 0;
  delete from khach_hang
@@ -284,6 +295,48 @@ SET SQL_SAFE_UPDATES = 1;
  union all
  select id_khach_hang,ho_ten,ngay_sinh,so_cmnd,sdt,email,dia_chi 
  from khach_hang;
+ 
+--  21.Tạo khung nhìn có tên là v_nhan_vien để lấy được thông tin của tất cả các nhân viên có địa chỉ là “Hải Châu” và 
+-- đã từng lập hợp đồng cho một hoặc nhiều khách hàng bất kì với ngày lập hợp đồng là “12/12/2019”.
+drop view v_nhan_vien;
+create view v_nhan_vien as
+select nhan_vien.*
+from nhan_vien
+join hop_dong on nhan_vien.id_nhan_vien = hop_dong.id_nhan_vien
+where nhan_vien.dia_chi = 'Quang ninh' and hop_dong.ngay_lam_hop_dong = '2019-12-12';
+
+-- 22.	Thông qua khung nhìn v_nhan_vien thực hiện cập nhật địa chỉ thành “Liên Chiểu” 
+-- đối với tất cả các nhân viên được nhìn thấy bởi khung nhìn này.
+SET SQL_SAFE_UPDATES = 0;
+update nhan_vien
+inner join v_nhan_vien on nhan_vien.id_nhan_vien = v_nhan_vien.id_nhan_vien
+set nhan_vien.dia_chi =  'Liên Chiểu';
+SET SQL_SAFE_UPDATES = 1;
+
+-- 23.	Tạo Stored Procedure sp_xoa_khach_hang dùng để xóa thông tin của một khách hàng nào đó với ma_khach_hang được truyền 
+ -- vào như là 1 tham số của sp_xoa_khach_hang.
+  delimiter //
+create procedure sp_xoa_khach_hang(id_delete int)
+begin
+DELETE FROM khach_hang
+    WHERE id_khach_hang = id_delete;
+end;
+// delimiter ;
+call sp_xoa_khach_hang(2);
+
+-- 24.	Tạo Stored Procedure sp_them_moi_hop_dong dùng để thêm mới 
+-- vào bảng hop_dong với yêu cầu sp_them_moi_hop_dong phải thực hiện kiểm tra tính hợp lệ của dữ liệu bổ sung, 
+-- với nguyên tắc không được trùng khóa chính và đảm bảo toàn vẹn tham chiếu đến các bảng liên quan.
+  delimiter //
+create procedure sp_them_moi_hop_dong(id_hop_dong int,ngay_lam_hop_dong date,ngay_ket_thuc date,tien_dat_coc double,id_nhan_vien int,id_khach_hang int,id_dich_vu int)
+begin
+insert into hop_dong
+values(id_hop_dong,ngay_lam_hop_dong,ngay_ket_thuc,tien_dat_coc,id_nhan_vien,id_khach_hang,id_dich_vu);
+end;
+// delimiter ;
+call sp_xoa_khach_hang(200,'2015/05/13','2020/03/14',8000,1,33,2);
+-- Error Code: 1318. Incorrect number of arguments for PROCEDURE
+
  
 
 
