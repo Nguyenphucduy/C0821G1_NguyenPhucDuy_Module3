@@ -1,0 +1,161 @@
+/* For desktop: */
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+
+[class*="col-"] {
+    float: left;
+    padding: 5px;
+}
+
+.row::after {
+    clear: both;
+    content: "";
+    display: block;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="col-"] {
+        width: 100%;
+    }
+
+    #header {
+        background-color: red;
+    }
+}
+
+body{
+    margin: 0;
+    font-family: Arial, serif;
+}
+.header {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+.logo {
+    border: 1px solid white;
+    padding: 0  20px 0 55px;
+}
+.search {
+    border: 1px solid lightgrey;
+    background-color: #eeeeee;
+    color: lightgrey;
+    border-radius: 50%;
+}
+#menu, #menu ul, #menu li{
+    padding:0;
+    margin:0;
+}
+
+#menu li{
+    list-style: none;
+    position: relative;
+    width:100px;
+    height: 30px;
+    padding:0 20px;
+    line-height: 30px;
+    cursor:pointer;
+}
+
+#menu li a{
+    text-decoration:none;
+    color: black;
+}
+
+#menu li:hover{
+    background-color:red;
+}
+
+#menu ul ul{
+    position: absolute;
+    top:0;
+    left:140px;
+    visibility:hidden;
+}
+
+#menu ul li:hover ul{
+    visibility:visible;
+}
+.sidebar-left,.sidebar-right {
+    background-color: white;
+    color: black;
+}
+
+.footer {
+    margin: 0;
+    border: 1px solid white;
+    color: black;
+    text-align: center;
+    height: 70px;
+    padding: 25px;
+}
+#like, #share {
+    margin-top: 0;
+    border: 1px solid white;
+    float: left;
+    width: 30%;
+    text-align: center;
+    font-size: x-large;
+    color: darkgrey;
+}
+#comment {
+    margin-top: 0;
+    border: 1px solid white;
+    float: left;
+    width: 40%;
+    text-align: center;
+    font-size: x-large;
+    color: darkgrey;
+}

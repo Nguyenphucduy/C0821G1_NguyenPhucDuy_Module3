@@ -1,0 +1,129 @@
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 5px;
+}
+
+.row::after {
+    clear: both;
+    content: "";
+    display: block;
+}
+
+* {
+    box-sizing: border-box;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="col-"] {
+        width: 100%;
+    }
+    #header {
+        background-color: red;
+    }
+}
+.header {
+    margin-left: 0;
+    background: #dfe4ea;
+    color: black;
+    font-style: italic;
+}
+
+.cartoon-text {
+    border: 1px solid black;
+    background: #ff3838;
+    border-radius: 10px;
+    color: white;
+}
+
+.menu {
+    margin-top: 5px;
+    background: #dfe4ea;
+    color: black;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.footer {
+    background: #dfe4ea;
+    color: black;
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    [class*= "col-"] {
+        width: 100%;
+    }
+
+    .header {
+        background: deepskyblue;
+    }
+}
+
+.title {
+    font-size: large;
+    font-weight: bold;
+}
+
+.channel-name {
+    font-size: large;
+    color: #5f6062;
+    margin-top: 1px;
+}
+
+.story {
+    font-size: large;
+    color: #5f6062;
+}
+body {
+    font-family: Arial, serif;
+    margin: 0;
+}

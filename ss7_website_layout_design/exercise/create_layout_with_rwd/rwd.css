@@ -1,0 +1,236 @@
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 5px;
+}
+
+.row::after {
+    clear: both;
+    content: "";
+    display: block;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="col-"] {
+        width: 100%;
+    }
+
+    #header {
+        background-color: red;
+    }
+}
+
+/* xoay  chiều */
+@media only screen and (orientation: landscape) {
+    body {
+        background-color: lightblue;
+    }
+
+}
+
+@media only screen and (min-width: 600px) {
+    /* For tablets: */
+    .col-m-1 {
+        width: 8.33%;
+    }
+
+    .col-m-2 {
+        width: 16.66%;
+    }
+
+    .col-m-3 {
+        width: 25%;
+    }
+
+    .col-m-4 {
+        width: 33.33%;
+    }
+
+    .col-m-5 {
+        width: 41.66%;
+    }
+
+    .col-m-6 {
+        width: 50%;
+    }
+
+    .col-m-7 {
+        width: 58.33%;
+    }
+
+    .col-m-8 {
+        width: 66.66%;
+    }
+
+    .col-m-9 {
+        width: 75%;
+    }
+
+    .col-m-10 {
+        width: 83.33%;
+    }
+
+    .col-m-11 {
+        width: 91.66%;
+    }
+
+    .col-m-12 {
+        width: 100%;
+    }
+
+
+    #header {
+        background-color: #00FF00;
+    }
+
+}
+
+.menu {
+    height: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul, .menu li {
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    position: relative;
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li a {
+    width: 100px;
+    height: 30px;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    line-height: 30px;
+}
+
+.menu ul ul li a {
+    width: 200px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.menu li a {
+    color: blue;
+}
+
+.menu li a:hover {
+    color: white;
+    background-color: #3498db;
+}
+
+.menu ul ul {
+    position: absolute;
+    top: 30px;
+    left: 15px;
+    visibility: hidden;
+}
+
+.menu ul li:hover ul {
+    visibility: visible;
+}
+
+.header {
+    background: #57606f;
+}
+
+.login {
+    text-align: right;
+    color: lightgrey;
+}
+
+.footer {
+    background: #57606f;
+    color: white;
+    text-align: center;
+    clear: both;
+}
+
+.link {
+    text-align: center;
+}
+
+.border {
+    margin: 20px 20px;
+    border: 1px solid #e0e0e0;
+    padding: 30px 50px;
+    text-align: center;
+    background-color: #e0e0e0;
+}
+
+
+.body {
+    background-color: lightgrey;
+
+}
+
+.body-2 {
+    background-color: white;
+}
+
+body {
+    font-family: Arial, serif;
+    margin: 0;
+}

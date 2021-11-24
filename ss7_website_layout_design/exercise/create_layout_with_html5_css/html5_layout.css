@@ -1,0 +1,54 @@
+body {
+    font-family: Verdana,sans-serif;
+    font-size: 0.9em;
+}
+
+header {
+    padding: 10px;
+    color: white;
+    background-color: black;
+}
+
+section {
+    margin: 5px;
+    padding: 10px;
+    background-color: lightgrey;
+}
+aside {
+    display: block;
+}
+
+article {
+    margin: 5px;
+    padding: 10px;
+    background-color: white;
+    display: block;
+}
+
+nav ul {
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 5px;
+}
+.body{
+    float: left;
+    width: 70%;
+}
+.aside {
+    float: left;
+    width: 30%;
+}
+.footer {
+    clear: both;
+    padding: 10px;
+    color: white;
+    background-color: black;
+    text-align: center;
+}
+body {
+    font-family: Arial, serif;
+    margin: 0;
+}
