@@ -77,12 +77,16 @@
 body{
     margin: 0;
     font-family: Arial, serif;
+    overflow: scroll;
 }
 .header {
     background-color: white;
     color: black;
     font-weight: bold;
     text-align: center;
+    position: fixed;
+    border: 3px solid #73AD21;
+    width: 100%;
 }
 .logo {
     border: 1px solid white;
