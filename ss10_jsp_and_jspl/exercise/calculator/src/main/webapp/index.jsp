@@ -36,7 +36,5 @@
     </table>
   </fieldset>
 </form>
-
-<h2>Result :  <%=request.getAttribute("result")%></h2>
 </body>
 </html>

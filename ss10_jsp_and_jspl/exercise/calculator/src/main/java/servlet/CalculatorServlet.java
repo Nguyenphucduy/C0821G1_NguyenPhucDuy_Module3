@@ -24,7 +24,7 @@ public class CalculatorServlet extends HttpServlet {
         }catch (Exception ex){
             request.setAttribute("Error: ",ex.getMessage());
         }
-        request.getRequestDispatcher("index.jsp").forward(request,response);
+        request.getRequestDispatcher("result.jsp").forward(request,response);
 
     }
 
