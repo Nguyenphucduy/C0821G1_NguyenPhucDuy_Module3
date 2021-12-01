@@ -26,7 +26,7 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public boolean saveProductService(Product product) {
         this.iProductRepository.saveRepository(product);
-        return false;
+        return product != null;
     }
 
     @Override

@@ -15,8 +15,9 @@
 <div>
     <h2>List Product</h2>
 </div>
-<div>
-    <c:out value="${msg}"/>
+<div >
+    <p style="color: red"><c:out value="${msg}"/></p>
+
 </div>
 
 <table border="1">

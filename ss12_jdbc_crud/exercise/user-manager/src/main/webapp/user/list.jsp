@@ -7,10 +7,17 @@
 </head>
 <body>
 <center>
-    <h1>User Management</h1>
-    <h2>
-        <a href="/users?choose=create">Add New User</a>
-    </h2>
+    <div>
+        <h1>User Management</h1>
+    </div>
+    <div>
+        <strong>
+            <a href="/users?choose=create" style="color: green">Add New User</a>
+        </strong>
+        <strong >
+            <a href="/users?choose=sort" style="color: blue">Sort list user with name</a>
+        </strong>
+    </div>
 </center>
 <div align="center">
     <table border="1" cellpadding="5">
@@ -35,6 +42,11 @@
             </tr>
         </c:forEach>
     </table>
+    <form method="post" action="/users">
+        <input type="hidden" name="choose" value="search">
+        <input type="text" name="country">
+        <button>Search</button>
+    </form>
 </div>
 </body>
 </html>

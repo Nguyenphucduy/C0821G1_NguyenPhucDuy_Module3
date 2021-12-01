@@ -18,6 +18,12 @@ public class UserRepository implements IUserRepository {
     private static final String SELECT_ALL_USERS = "select * from users";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
+    private static final String SELECT_USER_BY_COUNTRY = " select * \n" +
+            " from users\n" +
+            " where country = ?";
+    private static final String SELECT_ORDER_BY_NAME = "select * \n" +
+            " from users\n" +
+            " order by `name`;";
 
     public UserRepository() {
     }
@@ -113,7 +119,7 @@ public class UserRepository implements IUserRepository {
     public boolean updateUser(User user) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+             PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL)) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getCountry());
@@ -122,6 +128,58 @@ public class UserRepository implements IUserRepository {
             rowUpdated = statement.executeUpdate() > 0;
         }
         return rowUpdated;
+    }
+
+    @Override
+    public User searchCountry(String country) {
+        User user = null;
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_COUNTRY)) {
+            preparedStatement.setString(1, country);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (resultSet.next()) {
+                int  id = Integer.parseInt(resultSet.getString("id"));
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                user = new User(id, name, email, country);
+            }
+        } catch (SQLException e) {
+            e.getErrorCode();
+        }
+        return user;
+    }
+
+    @Override
+    public List<User> sortUserList() {
+
+        // using try-with-resources to avoid closing resources (boiler plate code)
+        List<User> users = new ArrayList<>();
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDER_BY_NAME);) {
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                users.add(new User(id, name, email, country));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return users;
     }
 
     private void printSQLException(SQLException ex) {

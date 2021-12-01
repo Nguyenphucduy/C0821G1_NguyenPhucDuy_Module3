@@ -19,6 +19,7 @@ public class UserServlet extends HttpServlet {
         private UserRepository userRepository;
 
         public void init() {
+
             userRepository = new UserRepository();
         }
 
@@ -36,13 +37,24 @@ public class UserServlet extends HttpServlet {
                     case "edit":
                         updateUser(request, response);
                         break;
+                    case "search":
+                        searchUser(request, response);
+                        break;
                 }
             } catch (SQLException ex) {
                 throw new ServletException(ex);
             }
         }
 
-        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    private void searchUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String country = request.getParameter("country");
+        User user =  userRepository.searchCountry(country);
+        request.setAttribute("user", user);
+        RequestDispatcher  dispatcher = request.getRequestDispatcher("user/search.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
             String action = request.getParameter("choose");
             if (action == null) {
@@ -60,6 +72,9 @@ public class UserServlet extends HttpServlet {
                     case "delete":
                         deleteUser(request, response);
                         break;
+                    case "sort":
+                        sortUser(request, response);
+                        break;
                     default:
                         listUser(request, response);
                         break;
@@ -69,7 +84,18 @@ public class UserServlet extends HttpServlet {
             }
         }
 
-        private void listUser(HttpServletRequest request, HttpServletResponse response)
+    private void sortUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<User> listUser = userRepository.sortUserList();
+        request.setAttribute("listUser", listUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/sort.jsp");
+        dispatcher.forward(request, response);
+    }
+    private void loadList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void listUser(HttpServletRequest request, HttpServletResponse response)
                 throws SQLException, IOException, ServletException {
             List<User> listUser = userRepository.selectAllUsers();
             request.setAttribute("listUser", listUser);
@@ -100,8 +126,7 @@ public class UserServlet extends HttpServlet {
             String country = request.getParameter("country");
             User newUser = new User(name, email, country);
             userRepository.insertUser(newUser);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("user/create.jsp");
-            dispatcher.forward(request, response);
+            loadList(request,response);
         }
 
         private void updateUser(HttpServletRequest request, HttpServletResponse response)
