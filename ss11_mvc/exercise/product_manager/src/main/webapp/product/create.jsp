@@ -12,7 +12,8 @@
 <body>
 <h1>Create new product</h1>
 
-<form method="post">
+<form action="/productController" method="post">
+    <input type="hidden" name="choose" value="create">
     <fieldset>
         <legend>product information</legend>
         <table>

@@ -15,6 +15,9 @@ public class Product {
         this.producer = producer;
     }
 
+    public Product() {
+    }
+
     public int getId() {
         return id;
     }

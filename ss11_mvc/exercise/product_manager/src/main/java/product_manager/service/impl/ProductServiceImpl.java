@@ -18,48 +18,37 @@ public class ProductServiceImpl implements IProductService {
             }
             return productList;
         } catch (Exception e) {
-            System.out.println("Gặp lỗi");
+            System.out.println("Error");
             return null;
         }
     }
 
     @Override
     public boolean saveProductService(Product product) {
-        if (checkProduct(product)){
-            iProductRepository.saveProduct(product);
-            return true;
-        }else {
-            return false;
-        }
+        this.iProductRepository.saveRepository(product);
+        return false;
     }
-
 
     @Override
     public Product findById(int id) {
-        return null;
-    }
-
-
-    @Override
-    public void update(int id, Product product) {
-
-        List<Product> productList = iProductRepository.update(id,product);
+        return this.iProductRepository.findById(id);
     }
 
     @Override
-    public void remove(int id) {
-        List<Product> productList = iProductRepository.remove(id);
+    public void goPageDelete(int id) {
+        iProductRepository.deleteProduct(id);
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+       iProductRepository.updateProduct(product);
 
     }
 
-    public boolean checkProduct(Product product){
-        if (!product.getName().matches("^[a-z A-z]{5,}$")){
-            return false;
-        }
-        if (product.getId()<0){
-            return false;
-        }
-        return true;
+    @Override
+    public Product searchProduct(String name) {
+        return iProductRepository.searchProduct(name);
     }
+
 
 }

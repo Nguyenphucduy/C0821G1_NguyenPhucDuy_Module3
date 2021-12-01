@@ -334,7 +334,7 @@ insert into hop_dong
 values(id_hop_dong,ngay_lam_hop_dong,ngay_ket_thuc,tien_dat_coc,id_nhan_vien,id_khach_hang,id_dich_vu);
 end;
 // delimiter ;
-call sp_xoa_khach_hang(200,'2015/05/13','2020/03/14',8000,1,33,2);
+call sp_xoa_khach_hang(88,'2015/05/13','2020/03/14',8000,1,33,2);
 -- Error Code: 1318. Incorrect number of arguments for PROCEDURE
 
  

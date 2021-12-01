@@ -32,7 +32,7 @@
     <c:forEach var="product" items="${productList}">
         <tr>
             <td><c:out value="${product.id}"/></td>
-            <td><c:out value="${product.name}"/></td>
+            <td><a href="/productController?choose=view&id=${product.id}">${product.name}</a></td>
             <td><c:out value="${product.price}"/></td>
             <td><c:out value="${product.description}"/></td>
             <td><c:out value="${product.producer}"/></td>
@@ -44,7 +44,7 @@
 <div>
     <a href="/productController?choose=create"><button>Create product</button></a>
 
-    <form method="get" action="/productController">
+    <form method="post" action="/productController">
         <input type="hidden" name="choose" value="search">
         <input type="text" name="nameProduct">
         <button>Search</button>

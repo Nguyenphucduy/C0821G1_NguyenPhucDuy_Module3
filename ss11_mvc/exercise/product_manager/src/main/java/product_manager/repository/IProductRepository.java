@@ -7,12 +7,14 @@ import java.util.List;
 public interface IProductRepository {
     List<Product> getAll();
 
-    void saveProduct(Product product);
+
+    void saveRepository(Product product);
 
     Product findById(int id);
 
-    List<Product> update(int id, Product product);
+    boolean deleteProduct(int id);
 
-    List<Product> remove(int id);
+    boolean updateProduct(Product product);
 
+    Product searchProduct(String name);
 }

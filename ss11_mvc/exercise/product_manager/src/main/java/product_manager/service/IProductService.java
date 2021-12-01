@@ -11,7 +11,9 @@ public interface IProductService {
 
     Product findById(int id);
 
-    void update(int id, Product product);
+    void goPageDelete(int id);
 
-    void remove(int id);
+    void  updateProduct(Product product);
+
+    Product searchProduct(String name);
 }
