@@ -131,27 +131,29 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User searchCountry(String country) {
-        User user = null;
+    public List<User> searchCountry(String country) {
+        List<User> users = new ArrayList<>();
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_COUNTRY)) {
-            preparedStatement.setString(1, country);
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_COUNTRY)) {
+            preparedStatement.setString(1,country);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet rs = preparedStatement.executeQuery();
 
             // Step 4: Process the ResultSet object.
-            while (resultSet.next()) {
-                int  id = Integer.parseInt(resultSet.getString("id"));
-                String name = resultSet.getString("name");
-                String email = resultSet.getString("email");
-                user = new User(id, name, email, country);
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                users.add(new User(id, name, email, country));
             }
         } catch (SQLException e) {
             e.getErrorCode();
         }
-        return user;
+        return users;
     }
 
     @Override
