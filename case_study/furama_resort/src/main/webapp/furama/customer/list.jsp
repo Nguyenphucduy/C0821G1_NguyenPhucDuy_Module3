@@ -9,9 +9,13 @@
     <h2>List Customer</h2>
 </div>
 <div>
-    <p style="color: red"><c:out value="${msg}"/></p>
+    <h3 style="color: green"><c:out value="${messenger}"/></h3>
+    <h3 style="color: blue">
+        Welcome, <%=request.getSession().getAttribute("usernameSession")%>
+    </h3>
 
 </div>
+
 
 <div>
     <a href="/customer_servlet?choose=create">
@@ -39,29 +43,24 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="contractDetail" items="${customerList}">
+    <c:forEach var="contract_detail" items="${customerList}">
         <tr>
-            <td><c:out value="${contractDetail.customerCode}"/></td>
-            <td><c:out value="${contractDetail.fullName}"/></td>
-            <td><c:out value="${contractDetail.dateOfBirth}"/></td>
-            <td>
-                    <%--                <c:if test="${customer.gender == 1}">--%>
-                    <%--                    Male--%>
-                    <%--                </c:if>--%>
-                    <%--                <c:if test="${customer.gender == 0}">--%>
-                    <%--                    Famale--%>
-                    <%--                </c:if>--%>
-                <c:out value="${contractDetail.gender}"/>
-            </td>
-            <td><c:out value="${contractDetail.identityCardNumber}"/></td>
-            <td><c:out value="${contractDetail.phoneNumber}"/></td>
-            <td><c:out value="${contractDetail.email}"/></td>
-            <td><c:out value="${contractDetail.address}"/></td>
-            <td><c:out value="${contractDetail.customerType}"/></td>
+            <td><c:out value="${contract_detail.customerCode}"/></td>
+            <td><c:out value="${contract_detail.fullName}"/></td>
+            <td><c:out value="${contract_detail.dateOfBirth}"/></td>
+            <td><c:out value="${contract_detail.gender}"/></td>
+            <td><c:out value="${contract_detail.identityCardNumber}"/></td>
+            <td><c:out value="${contract_detail.phoneNumber}"/></td>
+            <td><c:out value="${contract_detail.email}"/></td>
+            <td><c:out value="${contract_detail.address}"/></td>
+            <td><c:out value="${contract_detail.customerType}"/></td>
 
 
-            <td><a href="/customer_servlet?choose=edit&customerCode=${contractDetail.customerCode}">edit</a></td>
-            <td><a href="/customer_servlet?choose=delete&customerCode=${contractDetail.customerCode}">delete</a></td>
+
+            <td><a href="/customer_servlet?choose=edit&customerCode=${contract_detail.customerCode}">edit</a></td>
+            <td><a href="/customer_servlet?choose=delete&customerCode=${contract_detail.customerCode}"
+            onclick="return confirm('Are you sure you want to delete this item?')" >delete</a></td>
+
         </tr>
     </c:forEach>
 </table>

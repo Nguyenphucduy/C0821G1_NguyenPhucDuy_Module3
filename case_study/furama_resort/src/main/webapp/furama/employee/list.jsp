@@ -8,14 +8,21 @@
 <div>
     <h2>List Employee</h2>
 </div>
+
+<h3 style="color: blue">
+    Welcome, <%=request.getSession().getAttribute("usernameSession")%>
+</h3>
 <div>
-    <p style="color: red"><c:out value="${msg}"/></p>
+    <h3 style="color: green"><c:out value="${messenger}"/></h3>
 
 </div>
 
 <div>
     <a href="/employee_servlet?choose=create">
         <button>Create Employee</button>
+    </a>
+    <a href="/employee_servlet?choose=createUser">
+        <button>Create User Employee</button>
     </a>
 
     <form method="post" action="/employee_servlet">
@@ -42,24 +49,25 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="employee" items="${employeeList}">
+    <c:forEach var="contract_detail" items="${employeeList}">
         <tr>
-            <td><c:out value="${employee.employeeCode}"/></td>
-            <td><c:out value="${employee.fullName}"/></td>
-            <td><c:out value="${employee.dateOfBirth}"/></td>
-            <td><c:out value="${employee.identityCardNumber}"/></td>
-            <td><c:out value="${employee.phoneNumber}"/></td>
-            <td><c:out value="${employee.email}"/></td>
-            <td><c:out value="${employee.salary}"/></td>
-            <td><c:out value="${employee.address}"/></td>
-            <td><c:out value="${employee.position}"/></td>
-            <td><c:out value="${employee.educationDegree}"/></td>
-            <td><c:out value="${employee.division}"/></td>
-            <td><c:out value="${employee.userName}"/></td>
+            <td><c:out value="${contract_detail.employeeCode}"/></td>
+            <td><c:out value="${contract_detail.fullName}"/></td>
+            <td><c:out value="${contract_detail.dateOfBirth}"/></td>
+            <td><c:out value="${contract_detail.identityCardNumber}"/></td>
+            <td><c:out value="${contract_detail.phoneNumber}"/></td>
+            <td><c:out value="${contract_detail.email}"/></td>
+            <td><c:out value="${contract_detail.salary}"/></td>
+            <td><c:out value="${contract_detail.address}"/></td>
+            <td><c:out value="${contract_detail.position}"/></td>
+            <td><c:out value="${contract_detail.educationDegree}"/></td>
+            <td><c:out value="${contract_detail.division}"/></td>
+            <td><c:out value="${contract_detail.userName}"/></td>
 
 
-            <td><a href="/employee_servlet?choose=edit&employeeCode=${employee.employeeCode}">edit</a></td>
-            <td><a href="/employee_servlet?choose=delete&employeeCode=${employee.employeeCode}">delete</a></td>
+            <td><a href="/employee_servlet?choose=edit&employeeCode=${contract_detail.employeeCode}">edit</a></td>
+            <td><a href="/employee_servlet?choose=delete&employeeCode=${contract_detail.employeeCode}"
+                   onclick="return confirm('Are you sure you want to delete this item?')" >delete</a></td>
         </tr>
     </c:forEach>
 </table>

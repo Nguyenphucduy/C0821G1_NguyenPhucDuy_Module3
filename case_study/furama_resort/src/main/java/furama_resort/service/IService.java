@@ -2,11 +2,13 @@ package furama_resort.service;
 
 import furama_resort.bean.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
 
 public interface IService {
-    void createCustomer(Customer customer) throws SQLException;
+    boolean createCustomer(Customer customer) throws SQLException;
 
     List<Customer> getListCustomer();
 
@@ -14,13 +16,14 @@ public interface IService {
 
     Customer selectByCustomerCode(String customerCode);
 
-    void updateData(Customer customer);
+    boolean updateData(Customer customer);
 
     List<Customer> selectByName(String name);
+    //Service-------------------------------------------------
 
     List<ServiceResort> getListSerVice();
 
-    void createService(ServiceResort serviceResort) throws SQLException;
+    boolean createService(ServiceResort serviceResort) throws SQLException;
 
     void deleteService(String codeService) throws SQLException;
 
@@ -28,31 +31,44 @@ public interface IService {
 
     ServiceResort selectByServiceCode(String codeService);
 
-    void updateService(ServiceResort serviceResort);
+    boolean updateService(ServiceResort serviceResort);
+    //Employee-------------------------------------------------
 
     List<Employee> getListEmployee();
 
-    void createEmployee(Employee employee) throws SQLException;
+    boolean createEmployee(Employee employee) throws SQLException;
 
     void deleteEmployee(String code) throws SQLException;
 
     Employee selectByEmployeCode(String code);
 
-    void editEmployee(Employee employee);
+    boolean editEmployee(Employee employee);
 
     List<Employee> selectByEmployeeName(String name);
 
     List<Contract> getListContract();
+    //Contract-------------------------------------------------
 
-    void createContract(Contract contract) throws SQLException;
+    boolean createContract(Contract contract) throws SQLException;
 
     void deleteContract(String code) throws SQLException;
 
     Contract selectByContractCode(String code);
 
-    void editContract(Contract contract);
+    boolean editContract(Contract contract);
+    //Contract Detail -------------------------------------------------------
 
     List<ContractDetail> getListContractDetail();
 
     void createContractDetail(ContractDetail contractDetail) throws SQLException;
+
+    List<Customer> getListCustomerUsingService(HttpServletRequest request, HttpServletResponse response);
+
+    List<ServiceAttach> getListAttachService(HttpServletRequest request, HttpServletResponse response);
+
+    // User --------------------------------------------
+
+    void createUserEmployee(UserEmployee userEmployee) throws SQLException;
+
+    void createUserEmployeeMore(UserEmployee userEmployee) throws SQLException;
 }

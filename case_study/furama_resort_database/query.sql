@@ -37,7 +37,7 @@ service_type_name varchar(50) not null
 
 create table `user` (
 user_name varchar(50) not null primary key,
-`password` varchar(50) not null
+`password` varchar(50) 
 );
 
 create table `role` (
@@ -59,9 +59,9 @@ create table employee (
 employee_id varchar(6) not null unique primary key,
 employee_name varchar(50) not null,
 employee_birthday date not null,
-employee_id_card int not null,
+employee_id_card int(12) not null,
 employee_salary double not null,
-employee_phone int not null,
+employee_phone int(11) not null,
 employee_email  varchar(50) not null,
 employee_address varchar(50) not null,
 position_id int not null,
@@ -79,8 +79,8 @@ customer_id varchar(6) not null unique primary key,
 customer_name varchar(50) not null,
 customer_birthday date not null,
 customer_gender varchar(6) not null,
-customer_id_card int not null,
-customer_phone int not null,
+customer_id_card int(12) not null,
+customer_phone int(11) not null,
 customer_email varchar(50) not null,
 customer_address varchar(50) not null,
 customer_type_id int not null,

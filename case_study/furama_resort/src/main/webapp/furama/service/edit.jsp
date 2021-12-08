@@ -65,19 +65,49 @@
                 </td>
             </tr>
             <tr>
-                <th>Service Type Id:</th>
+                <th>Service Type Id:
+                    <c:if test="${service.serviceTypeId == 1}">
+                        Villa
+                    </c:if>
+                    <c:if test="${service.serviceTypeId == 2}">
+                        House
+                    </c:if>
+                    <c:if test="${service.serviceTypeId == 3}">
+                        Room
+                    </c:if>
+
+                </th>
                 <td>
-                    <input type="text" name="serviceTypeId"
-                           value="<c:out value='${service.serviceTypeId}' />"
-                    />
+                    <select name="serviceTypeId" >
+                        <option value="1">Villa</option>
+                        <option value="2">House</option>
+                        <option value="3">Room</option>
+                    </select>
                 </td>
             </tr>
             <tr>
-                <th>Rental Type:</th>
+                <th>Rental Type:
+                    <c:if test="${service.rentalType == 1}">
+                        Year
+                    </c:if>
+                    <c:if test="${service.rentalType == 2}">
+                        Month
+                    </c:if>
+                    <c:if test="${service.rentalType == 3}">
+                        Day
+                    </c:if>
+                    <c:if test="${service.rentalType == 4}">
+                        House
+                    </c:if>
+                </th>
+
                 <td>
-                    <input type="text" name="rentalType"
-                           value="<c:out value='${service.rentalType}' />"
-                    />
+                    <select name="rentalType" >
+                        <option value="1">Year</option>
+                        <option value="2">Month</option>
+                        <option value="3">Day</option>
+                        <option value="4">House</option>
+                    </select>
                 </td>
             </tr>
             <tr>

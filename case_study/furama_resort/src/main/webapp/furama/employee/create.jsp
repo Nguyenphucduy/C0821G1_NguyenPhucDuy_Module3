@@ -27,7 +27,7 @@
             </tr>
             <tr>
                 <td>Employee Date Of Birth: </td>
-                <td><input type="text" name="dateOfBirth" ></td>
+                <td><input type="date" name="dateOfBirth" ></td>
             </tr>
             <tr>
                 <td>Employee Identity Card Number: </td>
@@ -51,15 +51,41 @@
             </tr>
             <tr>
                 <td>Employee Position: </td>
-                <td><input type="text" name="position" ></td>
+                <td>
+                    <select name="position" >
+                        <option value="1">Lễ Tân</option>
+                        <option value="2">Phục Vụ</option>
+                        <option value="3">Chuyên Viên</option>
+                        <option value="4">Giám Sát</option>
+                        <option value="5">Quản Lý</option>
+                        <option value="6">Giám Đốc</option>
+                    </select>
+                </td>
+<%--                <td><input type="text" name="position" ></td>--%>
             </tr>
             <tr>
                 <td>Employee Education Degree: </td>
-                <td><input type="text" name="educationDegree" ></td>
+                <td>
+                    <select name="educationDegree" >
+                        <option value="1">Cao Đẳng</option>
+                        <option value="2">Đại Học</option>
+                        <option value="3">Trung Cấp</option>
+                        <option value="4">Sau Đại Học</option>
+                    </select>
+                </td>
+<%--                <td><input type="text" name="educationDegree" ></td>--%>
             </tr>
             <tr>
                 <td>Employee Division: </td>
-                <td><input type="text" name="division" ></td>
+                <td>
+                    <select name="division" >
+                        <option value="1">Sale - Marketing</option>
+                        <option value="2">Hành Chính</option>
+                        <option value="3">Phục Vụ</option>
+                        <option value="4">Quản Lý</option>
+                    </select>
+                </td>
+<%--                <td><input type="text" name="division" ></td>--%>
             </tr>
             <tr>
                 <td>Employee User Name: </td>

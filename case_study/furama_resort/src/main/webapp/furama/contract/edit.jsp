@@ -50,22 +50,50 @@
                 ></td>
             </tr>
             <tr>
-                <td>employee Code: </td>
-                <td><input type="text" name="employeeCode"
-                           value="<c:out value='${contract.employeeCode}' />">
-                ></td>
+                <td>employee Code:
+                    <c:out value='${contract.employeeCode}' />
+                </td>
+                <td>
+                    <select name="employeeCode">
+                        <c:forEach var="employee" items="${employeeList}">
+                            <option value="<c:out value="${employee.employeeCode}"/>"><c:out value="${employee.employeeCode}"/></option>
+                        </c:forEach>
+                    </select>
+                    <%--            <td><input type="text" name="employeeCode"></td>--%>
+                </td>
+<%--                <td><input type="text" name="employeeCode"--%>
+<%--                           value="<c:out value='${contract.employeeCode}' />">--%>
+<%--                ></td>--%>
             </tr>
             <tr>
-                <td> customer Code: </td>
-                <td><input type="text" name="customerCode"
-                           value="<c:out value='${contract.customerCode}' />">
-                ></td>
+                <td> customer Code:
+                    <c:out value='${contract.customerCode}' />
+                </td>
+                <td>
+                    <select name="customerCode">
+                        <c:forEach var="contract_detail" items="${customerList}">
+                            <option value="<c:out value="${contract_detail.customerCode}"/>"><c:out value="${contract_detail.customerCode}"/></option>
+                        </c:forEach>
+                    </select>
+                </td>
+<%--                <td><input type="text" name="customerCode"--%>
+<%--                           value="<c:out value='${contract.customerCode}' />">--%>
+<%--                ></td>--%>
             </tr>
             <tr>
-                <td>service Code: </td>
-                <td><input type="text" name="serviceCode"
-                           value="<c:out value='${contract.serviceCode}' />">
-                ></td>
+                <td>service Code:
+                    <c:out value='${contract.serviceCode}' />
+                </td>
+                <td>
+                    <select name="serviceCode">
+                        <c:forEach var="contract" items="${serviceResortList}">
+                            <option value="<c:out value="${contract.codeService}"/>"><c:out value="${contract.codeService}"/></option>
+                        </c:forEach>
+                    </select>
+                </td>
+<%--                <td><input type="text" name="serviceCode"--%>
+<%--                           value="<c:out value='${contract.serviceCode}' />">--%>
+<%--                ></td>--%>
             </tr>
             <tr>
                 <td><input type="submit" value="Update Contract"></td>

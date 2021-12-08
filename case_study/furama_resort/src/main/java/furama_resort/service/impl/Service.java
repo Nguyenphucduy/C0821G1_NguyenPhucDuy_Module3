@@ -1,24 +1,37 @@
 package furama_resort.service.impl;
 
 import furama_resort.bean.*;
+import furama_resort.common.ICommon;
+import furama_resort.common.impl.Validate;
 import furama_resort.repository.IRepositoryService;
 import furama_resort.repository.impl.RepositoryService;
 import furama_resort.service.IService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
 
 public class Service implements IService {
     IRepositoryService iRepositoryService = new RepositoryService();
-
+    ICommon validate = new Validate();
     @Override
-    public void createCustomer(Customer customer) throws SQLException {
-        iRepositoryService.createCustomer(customer);
+    public boolean createCustomer(Customer customer) throws SQLException {
+        if(validate.checkCustomer(customer)) {
+            iRepositoryService.createCustomer(customer);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public List<Customer> getListCustomer() {
-        return iRepositoryService.getListCustomer();
+        if (iRepositoryService.getListCustomer().size()==0){
+            return null;
+        }else {
+            return iRepositoryService.getListCustomer();
+        }
     }
 
     @Override
@@ -32,8 +45,13 @@ public class Service implements IService {
     }
 
     @Override
-    public void updateData(Customer customer) {
-        iRepositoryService.updateData(customer);
+    public boolean updateData(Customer customer) {
+        if(validate.checkCustomer(customer)) {
+            iRepositoryService.updateData(customer);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -47,8 +65,13 @@ public class Service implements IService {
     }
 
     @Override
-    public void createService(ServiceResort serviceResort) throws SQLException {
-        iRepositoryService.createService(serviceResort);
+    public boolean createService(ServiceResort serviceResort) throws SQLException {
+        if (!validate.checkService(serviceResort)){
+            return false;
+        }else {
+            iRepositoryService.createService(serviceResort);
+            return true;
+        }
     }
 
     @Override
@@ -67,8 +90,15 @@ public class Service implements IService {
     }
 
     @Override
-    public void updateService(ServiceResort serviceResort) {
-        iRepositoryService.updateService(serviceResort);
+    public boolean updateService(ServiceResort serviceResort) {
+        if (!validate.checkService(serviceResort)){
+            return false;
+
+        }else {
+            iRepositoryService.updateService(serviceResort);
+            return true;
+        }
+
     }
 //Employee -----------------------------------------------------------------------------------------------------
     @Override
@@ -77,8 +107,14 @@ public class Service implements IService {
     }
 
     @Override
-    public void createEmployee(Employee employee) throws SQLException {
-        iRepositoryService.createEmployee(employee);
+    public boolean createEmployee(Employee employee) throws SQLException {
+        if (!validate.checkEmployee(employee)){
+            return false;
+        }else {
+            iRepositoryService.createEmployee(employee);
+            return true;
+        }
+
     }
 
     @Override
@@ -92,8 +128,13 @@ public class Service implements IService {
     }
 
     @Override
-    public void editEmployee(Employee employee) {
-        iRepositoryService.editEmployee(employee);
+    public boolean editEmployee(Employee employee) {
+        if (!validate.checkEmployee(employee)){
+            return false;
+        }else {
+            iRepositoryService.editEmployee(employee);
+            return true;
+        }
     }
 
     @Override
@@ -107,8 +148,14 @@ public class Service implements IService {
     }
 
     @Override
-    public void createContract(Contract contract) throws SQLException {
-        iRepositoryService.createContract(contract);
+    public boolean createContract(Contract contract) throws SQLException {
+        if (!validate.checkContract(contract)){
+            return false;
+        }else {
+            iRepositoryService.createContract(contract);
+            return true;
+        }
+
     }
 
     @Override
@@ -122,8 +169,13 @@ public class Service implements IService {
     }
 
     @Override
-    public void editContract(Contract contract) {
-        iRepositoryService.editContract(contract);
+    public boolean editContract(Contract contract) {
+        if (!validate.checkContract(contract)){
+            return false;
+        }else {
+            iRepositoryService.editContract(contract);
+            return true;
+        }
     }
 // Contract Detail -----------------------------------------------------------
     @Override
@@ -135,4 +187,26 @@ public class Service implements IService {
     public void createContractDetail(ContractDetail contractDetail) throws SQLException {
         iRepositoryService.createContractDetail(contractDetail);
     }
+    // Customer Using Service
+    @Override
+    public List<Customer> getListCustomerUsingService(HttpServletRequest request, HttpServletResponse response) {
+        return iRepositoryService.getListCustomerUsingService();
+    }
+
+    @Override
+    public List<ServiceAttach> getListAttachService(HttpServletRequest request, HttpServletResponse response) {
+        return iRepositoryService.getListAttachService();
+    }
+// User-----------------------------------------------
+    @Override
+    public void createUserEmployee(UserEmployee userEmployee) throws SQLException {
+        iRepositoryService.createUserEmployee(userEmployee);
+    }
+
+    @Override
+    public void createUserEmployeeMore(UserEmployee userEmployee) throws SQLException {
+        iRepositoryService.createUserEmployeeMore(userEmployee);
+    }
+
+
 }

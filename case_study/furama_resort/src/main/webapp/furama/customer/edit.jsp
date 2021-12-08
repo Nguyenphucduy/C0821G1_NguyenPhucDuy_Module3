@@ -17,11 +17,11 @@
                     Edit Customer
                 </h2>
             </caption>
-<%--            <c:if test="${customer != null}">--%>
-<%--                <input type="hidden" name="customerCode" value="<c:out value='${customer.customerCode}' />"/>--%>
-<%--            </c:if>--%>
+            <%--            <c:if test="${customer != null}">--%>
+            <%--                <input type="hidden" name="customerCode" value="<c:out value='${customer.customerCode}' />"/>--%>
+            <%--            </c:if>--%>
             <tr>
-                <input type="hidden" name="edit" />"
+                <input type="hidden" name="edit"/>
             </tr>
             <tr>
                 <input type="hidden" name="customerCode" value="<c:out value='${customer.customerCode}' />"/>
@@ -83,11 +83,40 @@
                 </td>
             </tr>
             <tr>
-                <th>Customer type id:</th>
+                <%--                <td>--%>
+                <%--                    <input type="hidden"--%>
+                <%--                           value="<c:out value='${customer.customerType}' />"--%>
+                <%--                    />--%>
+                <%--                </td>--%>
+
+                <td>Customer type id:
+                <c:if test="${customer.customerType == 1}">
+                    Diamond
+                </c:if>
+                <c:if test="${customer.customerType == 2}">
+                    Platinium
+                </c:if>
+                <c:if test="${customer.customerType == 3}">
+                    Gold
+                </c:if>
+
+                <c:if test="${customer.customerType == 4}">
+                    Silver
+                </c:if>
+
+                <c:if test="${customer.customerType == 5}">
+                    Member
+                </c:if>
+                </td>
+
                 <td>
-                    <input type="text" name="typeIdCustomer"
-                           value="<c:out value='${customer.customerType}' />"
-                    />
+                    <select name="typeIdCustomer">
+                        <option value="1">Diamond</option>
+                        <option value="2">Platinium</option>
+                        <option value="3">Gold</option>
+                        <option value="4">Silver</option>
+                        <option value="5">Member</option>
+                    </select>
                 </td>
             </tr>
 

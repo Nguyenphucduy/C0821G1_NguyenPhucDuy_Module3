@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "ContractDetailServlet" , urlPatterns = {"","/contract_detail_servlet"})
+@WebServlet(name = "ContractDetailServlet" , urlPatterns = "/contract_detail_servlet")
 public class ContractDetailServlet extends HttpServlet {
     IService service = new Service();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -68,6 +68,8 @@ public class ContractDetailServlet extends HttpServlet {
     }
 
     private void goPageCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Contract> contractList = service.getListContract();
+        request.setAttribute("contractList",contractList);
         request.getRequestDispatcher("furama/contract_detail/create.jsp").forward(request, response);
     }
 

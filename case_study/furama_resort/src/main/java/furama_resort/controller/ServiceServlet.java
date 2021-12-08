@@ -1,6 +1,7 @@
 package furama_resort.controller;
 
 import furama_resort.bean.Customer;
+import furama_resort.bean.ServiceAttach;
 import furama_resort.bean.ServiceResort;
 import furama_resort.service.IService;
 import furama_resort.service.impl.Service;
@@ -55,7 +56,12 @@ public class ServiceServlet extends HttpServlet {
         double poolArea = Double.parseDouble(request.getParameter("poolArea"));
         int numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
         ServiceResort serviceResort = new ServiceResort(code,name,area,rentCost,numberOfPeople,serviceTypeId,rentalType,standardRoom,descriptionOtherConvenience,poolArea,numberOfFloors);
-        iService.updateService(serviceResort);
+        boolean check = iService.updateService(serviceResort);
+        if (check){
+            request.setAttribute("messenger","Update Done");
+        }else {
+            request.setAttribute("messenger","Error Validate");
+        }
         getListService(request,response);
     }
 
@@ -82,7 +88,13 @@ public class ServiceServlet extends HttpServlet {
 
         ServiceResort serviceResort = new ServiceResort(code,name,area,rentCost,numberOfPeople,serviceTypeId,rentalType,standardRoom,descriptionOtherConvenience,poolArea,numberOfFloors);
 
-        iService.createService(serviceResort);
+        boolean check = iService.createService(serviceResort);
+        if (check){
+            request.setAttribute("messenger","Create Done");
+        }else {
+            request.setAttribute("messenger","Error Validate");
+        }
+
         getListService(request,response);
     }
 
@@ -106,10 +118,21 @@ public class ServiceServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "getListCustomer":
+                getListCustomerUsingService(request,response);
+                break;
             default:
                 getListService(request,response);
                 break;
         }
+    }
+
+    private void getListCustomerUsingService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Customer> customerList = iService.getListCustomerUsingService(request,response);
+        List<ServiceAttach> serviceAttachList = iService.getListAttachService(request,response);
+        request.setAttribute("customerListUsingService",customerList);
+        request.setAttribute("serviceAttachList",serviceAttachList);
+        request.getRequestDispatcher("furama/service/list_customer.jsp").forward(request, response);
     }
 
     private void goPageEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

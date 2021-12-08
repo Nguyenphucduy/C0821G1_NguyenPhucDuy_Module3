@@ -2,7 +2,10 @@ package furama_resort.controller;
 
 import furama_resort.bean.Employee;
 import furama_resort.bean.ServiceResort;
+import furama_resort.bean.UserEmployee;
 import furama_resort.service.IService;
+import furama_resort.service.employee.IServiceEmployee;
+import furama_resort.service.employee.impl.ServiceEmployee;
 import furama_resort.service.impl.Service;
 
 import javax.servlet.ServletException;
@@ -17,6 +20,7 @@ import java.util.List;
 @WebServlet(name = "EmployeeServlet" , urlPatterns = "/employee_servlet")
 public class EmployeeServlet extends HttpServlet {
     IService iService = new Service();
+    IServiceEmployee iServiceEmployee = new ServiceEmployee();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String choose = request.getParameter("choose");
 
@@ -31,6 +35,13 @@ public class EmployeeServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "createUser":
+                try {
+                    createUser(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
             case "edit":
                 editEmployee(request,response);
                 break;
@@ -41,9 +52,17 @@ public class EmployeeServlet extends HttpServlet {
         }
     }
 
+    private void createUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        UserEmployee userEmployee = new UserEmployee();
+        userEmployee.setUserName(request.getParameter("userName"));
+        userEmployee.setPassword(request.getParameter("userPassword"));
+        iService.createUserEmployee(userEmployee);
+        getListEmployee(request,response);
+    }
+
     private void selectEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("nameEmployee");
-        List<Employee> employeeList = iService.selectByEmployeeName(name);
+        List<Employee> employeeList = iServiceEmployee.selectByEmployeeName(name);
         request.setAttribute("employeeList",employeeList);
         request.getRequestDispatcher("furama/employee/list.jsp").forward(request,response);
     }
@@ -62,11 +81,21 @@ public class EmployeeServlet extends HttpServlet {
         employee.setEducationDegree(Integer.parseInt(request.getParameter("educationDegree")));
         employee.setDivision(Integer.parseInt(request.getParameter("division")));
         employee.setUserName(request.getParameter("userName"));
-        iService.editEmployee(employee);
+        boolean check = iServiceEmployee.editEmployee(employee);
+        if (!check){
+            request.setAttribute("messenger","Error Validate");
+        }else {
+            request.setAttribute("messenger","Update Done");
+        }
         getListEmployee(request,response);
     }
 
     private void createEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        UserEmployee userEmployee = new UserEmployee();
+        userEmployee.setUserName(request.getParameter("userName"));
+        iService.createUserEmployeeMore(userEmployee);
+
+
         Employee employee = new Employee();
         employee.setEmployeeCode(request.getParameter("employeeCode"));
         employee.setFullName(request.getParameter("fullName"));
@@ -80,7 +109,14 @@ public class EmployeeServlet extends HttpServlet {
         employee.setEducationDegree(Integer.parseInt(request.getParameter("educationDegree")));
         employee.setDivision(Integer.parseInt(request.getParameter("division")));
         employee.setUserName(request.getParameter("userName"));
-        iService.createEmployee(employee);
+
+
+        boolean check = iServiceEmployee.createEmployee(employee);
+        if (!check){
+            request.setAttribute("messenger","Error Validate");
+        }else {
+            request.setAttribute("messenger","Create Done");
+        }
         getListEmployee(request,response);
     }
 
@@ -93,6 +129,9 @@ public class EmployeeServlet extends HttpServlet {
         switch (choose) {
             case "create":
                 goPageCreate(request,response);
+                break;
+            case "createUser":
+                goPageCreateUser(request,response);
                 break;
             case "delete":
                 try {
@@ -110,16 +149,20 @@ public class EmployeeServlet extends HttpServlet {
         }
     }
 
+    private void goPageCreateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("furama/employee/create_user.jsp").forward(request, response);
+    }
+
     private void goPageEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String code = request.getParameter("employeeCode");
-        Employee employee = iService.selectByEmployeCode(code);
+        Employee employee = iServiceEmployee.selectByEmployeCode(code);
         request.setAttribute("employee",employee);
         request.getRequestDispatcher("furama/employee/edit.jsp").forward(request, response);
     }
 
     private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String code = request.getParameter("employeeCode");
-        iService.deleteEmployee(code);
+        iServiceEmployee.deleteEmployee(code);
         getListEmployee(request,response);
     }
 
@@ -128,7 +171,7 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     private void getListEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Employee> employeeList = iService.getListEmployee();
+        List<Employee> employeeList = iServiceEmployee.getListEmployee();
 
         request.setAttribute("employeeList",employeeList);
         request.getRequestDispatcher("furama/employee/list.jsp").forward(request,response);

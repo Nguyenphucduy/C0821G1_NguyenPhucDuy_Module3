@@ -45,7 +45,7 @@ public class RepositoryService implements IRepositoryService {
             Customer customer ;
             while (resultSet.next()) {
                 customer = new Customer();
-
+                customer.setCustomerCode(resultSet.getString("customer_id"));
                 customer.setFullName(resultSet.getString("customer_name"));
                 customer.setDateOfBirth(resultSet.getString("customer_birthday"));
                 customer.setGender(resultSet.getString("customer_gender"));
@@ -141,17 +141,17 @@ public class RepositoryService implements IRepositoryService {
     public List<Customer> selectByName(String name) {
         List<Customer> customerList = new ArrayList<>();
 
-//        String nameFix = "%";
-//        String nameFix2 = nameFix.concat(name);
+        String nameFix = ""+name+"%";
+
 
         String query = "select * \n" +
                 "from customer\n" +
-                "where customer_name = ?  \n" +
+                "where customer_name like ?  \n" +
                 "order by customer_name;";
         try (
                 PreparedStatement preparedStatement =
                         BaseRepository.connection.prepareStatement(query)) {
-            preparedStatement.setString(1, name);
+            preparedStatement.setString(1, nameFix);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -253,21 +253,22 @@ public class RepositoryService implements IRepositoryService {
     public List<ServiceResort> selectServiceByName(String name) {
         List<ServiceResort> serviceResortList = new ArrayList<>();
 
-//        String nameFix = "%";
-//        String nameFix2 = nameFix.concat(name);
+        String nameFix = ""+name+"%";
+
 
         String query = "select * \n" +
                 "from service\n" +
-                "where service_name = ?  \n" +
+                "where service_name like ?  \n" +
                 "order by service_name;";
         try (
                 PreparedStatement preparedStatement =
                         BaseRepository.connection.prepareStatement(query)) {
-            preparedStatement.setString(1, name);
+            preparedStatement.setString(1, nameFix);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 String  service_id = resultSet.getString("service_id");
+                String  service_name = resultSet.getString("service_name");
                 double service_area = Double.parseDouble(resultSet.getString("service_area"));
                 double  service_cost = Double.parseDouble(resultSet.getString("service_cost"));
                 int service_max_people = Integer.parseInt(resultSet.getString("service_max_people"));
@@ -281,7 +282,7 @@ public class RepositoryService implements IRepositoryService {
 
 
 
-                serviceResortList.add(new ServiceResort(service_id,name,service_area,service_cost,service_max_people,service_type_id,rent_type_id,standard_room,description_other_convenience,pool_area,number_of_floors));
+                serviceResortList.add(new ServiceResort(service_id,service_name,service_area,service_cost,service_max_people,service_type_id,rent_type_id,standard_room,description_other_convenience,pool_area,number_of_floors));
             }
         } catch (SQLException e) {
             e.getErrorCode();
@@ -492,17 +493,16 @@ public class RepositoryService implements IRepositoryService {
     public List<Employee> selectByEmployeeName(String name) {
         List<Employee> employeeList = new ArrayList<>();
 
-//        String nameFix = "%";
-//        String nameFix2 = nameFix.concat(name);
+        String nameFix = ""+name+"%";
 
         String query = "select * \n" +
                 "from employee\n" +
-                "where employee_name = ?  \n" +
+                "where employee_name like ? \n" +
                 "order by employee_name;";
         try (
                 PreparedStatement preparedStatement =
                         BaseRepository.connection.prepareStatement(query)) {
-            preparedStatement.setString(1, name);
+            preparedStatement.setString(1, nameFix);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -538,10 +538,20 @@ public class RepositoryService implements IRepositoryService {
 
         String query = "select *\n" +
                 "from contract;";
+//        String query2 = "select contract.contract_id,contract.contract_start_date,contract.contract_end_date,contract.contract_deposit\n" +
+//                ",sum((attach_service.attach_service_quantity*rent_type.rent_type_cost) + service.service_cost) as contract_total_money,contract.employee_id,\n" +
+//                "contract.customer_id, contract.service_id\n" +
+//                "from contract\n" +
+//                "left join contract_detail on contract.contract_id = contract_detail.contract_id\n" +
+//                "left join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id\n" +
+//                "left join service on contract.service_id = service.service_id\n" +
+//                "left join rent_type on service.rent_type_id = rent_type.rent_type_id\n" +
+//                "group by contract.contract_id;";
 
         try {
             Statement statement = BaseRepository.connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
+//            ResultSet resultSet = statement.executeQuery(query2);
 
             Contract contract ;
             while (resultSet.next()) {
@@ -694,6 +704,113 @@ public class RepositoryService implements IRepositoryService {
                 BaseRepository.connection.prepareStatement(query);
         preparedStatement.setString(1, contractDetail.getContractCode());
         preparedStatement.setString(2, String.valueOf(contractDetail.getAttachServiceCode()));
+
+        preparedStatement.executeUpdate();
+    }
+// List Customer Using Service
+    @Override
+    public List<Customer> getListCustomerUsingService() {
+        List<Customer> customerList = new ArrayList<>();
+
+
+        String query = "select  customer.customer_id,customer.customer_name,customer.customer_birthday,customer.customer_gender,customer.customer_id_card,customer.customer_phone,customer.customer_email,customer.customer_address,customer.customer_type_id,attach_service.attach_service_name\n" +
+                "from customer\n" +
+                "join contract on customer.customer_id = contract.customer_id\n" +
+                "join service on contract.service_id = service.service_id\n" +
+                "join contract_detail on contract.contract_id = contract_detail.contract_id\n" +
+                "join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id\n" +
+                "group by customer.customer_id,attach_service.attach_service_id;";
+
+        try {
+            Statement statement = BaseRepository.connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            Customer customer ;
+            while (resultSet.next()) {
+                customer = new Customer();
+                customer.setCustomerCode(resultSet.getString("customer_id"));
+                customer.setFullName(resultSet.getString("customer_name"));
+                customer.setDateOfBirth(resultSet.getString("customer_birthday"));
+                customer.setGender(resultSet.getString("customer_gender"));
+                customer.setIdentityCardNumber(resultSet.getString("customer_id_card"));
+                customer.setPhoneNumber(resultSet.getString("customer_phone"));
+                customer.setEmail(resultSet.getString("customer_email"));
+                customer.setCustomerCode(resultSet.getString("customer_id"));
+                customer.setAddress(resultSet.getString("customer_address"));
+                customer.setCustomerType(Integer.parseInt(resultSet.getString("customer_type_id")));
+
+                customerList.add(customer);
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return customerList;
+    }
+
+    @Override
+    public List<ServiceAttach> getListAttachService() {
+        List<ServiceAttach> serviceAttachList = new ArrayList<>();
+
+
+        String query = "select attach_service.attach_service_id,attach_service.attach_service_name,attach_service.attach_service_cost,attach_service.attach_service_unit,attach_service.attach_service_quantity,attach_service.attach_service_status\n" +
+                "from customer\n" +
+                "join contract on customer.customer_id = contract.customer_id\n" +
+                "join service on contract.service_id = service.service_id\n" +
+                "join contract_detail on contract.contract_id = contract_detail.contract_id\n" +
+                "join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id\n" +
+                "group by customer.customer_id,attach_service.attach_service_id;";
+
+        try {
+            Statement statement = BaseRepository.connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            ServiceAttach serviceAttach ;
+            while (resultSet.next()) {
+                serviceAttach = new ServiceAttach();
+                serviceAttach.setAttachServiceCode(Integer.parseInt(resultSet.getString("attach_service_id")));
+                serviceAttach.setAttachServiceName(resultSet.getString("attach_service_name"));
+                serviceAttach.setAttachServiceCost(Double.parseDouble(resultSet.getString("attach_service_cost")));
+                serviceAttach.setAttachServiceUnit(resultSet.getString("attach_service_unit"));
+                serviceAttach.setAttachServiceQuantity(Integer.valueOf(resultSet.getString("attach_service_quantity")));
+                serviceAttach.setAttachServiceStatus(resultSet.getString("attach_service_status"));
+
+                serviceAttachList.add(serviceAttach);
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return serviceAttachList;
+    }
+
+    @Override
+    public void createUserEmployee(UserEmployee userEmployee) throws SQLException {
+
+        String query = "insert into user\n" +
+                "values\n" +
+                "(?,?);";
+        PreparedStatement preparedStatement =
+                BaseRepository.connection.prepareStatement(query);
+        preparedStatement.setString(1, userEmployee.getUserName());
+        preparedStatement.setString(2, userEmployee.getPassword());
+
+
+        preparedStatement.executeUpdate();
+    }
+    @Override
+    public void createUserEmployeeMore(UserEmployee userEmployee) throws SQLException {
+
+        String query = "insert into user\n" +
+                "(user_name)\n" +
+                "values\n" +
+                "(?);";
+        PreparedStatement preparedStatement =
+                BaseRepository.connection.prepareStatement(query);
+        preparedStatement.setString(1, userEmployee.getUserName());
+
 
         preparedStatement.executeUpdate();
     }

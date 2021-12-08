@@ -32,17 +32,25 @@ values
 ('VyC0821G1','Vy1234'),
 ('DuC0821G1','Du1234'),
 ('TamC0821G1','Tam1234');
+-- insert into user
+-- (user_name)
+-- values
+-- (?);
+
+-- insert into user
+-- values
+-- (?,?);
 
 
 -- insert employee
 insert into employee
 values 
-('Nv1234','Phuc Duy','1997/03/06',123456789,500,0335773636,'phucduy@gmail.com','quang ninh',1,1,1,'DuyC0821G1'),
-('Nv1235','Huu Du','1997/03/07',123456781,5000,0335773635,'HuuDu@gmail.com','quang nam',2,2,2,'DuC0821G1'),
-('Nv1236','Anh Tam','1997/03/08',123456782,200,0335773634,'AnhTam@gmail.com','quang nam',3,3,3,'TamC0821G1'),
-('Nv1237','Gia Bao','1997/03/09',123456783,300,0335773633,'GiaBao@gmail.com','da nang',4,4,4,'BaoC0821G1'),
-('Nv1238','Thao Vy','1997/03/10',123456784,4000,0335773632,'ThaoVy@gmail.com','da nang',1,1,1,'VyC0821G1'),
-('Nv1239','Nhat Anh','1997/03/11',123456785,55500,0335773631,'NgocDu@gmail.com','quang ninh',2,2,2,'AnhC0821G1');
+('NV1234','Phuc Duy','1997/03/06',123456789,500,0335773636,'phucduy@gmail.com','quang ninh',1,1,1,'DuyC0821G1'),
+('NV1235','Huu Du','1997/03/07',123456781,5000,0335773635,'HuuDu@gmail.com','quang nam',2,2,2,'DuC0821G1'),
+('NV1236','Anh Tam','1997/03/08',123456782,200,0335773634,'AnhTam@gmail.com','quang nam',3,3,3,'TamC0821G1'),
+('NV1237','Gia Bao','1997/03/09',123456783,300,0335773633,'GiaBao@gmail.com','da nang',4,4,4,'BaoC0821G1'),
+('NV1238','Thao Vy','1997/03/10',123456784,4000,0335773632,'ThaoVy@gmail.com','da nang',1,1,1,'VyC0821G1'),
+('NV1239','Nhat Anh','1997/03/11',123456785,55500,0335773631,'NgocDu@gmail.com','quang ninh',2,2,2,'AnhC0821G1');
 
 
 -- insert into employee
@@ -55,6 +63,10 @@ values
 -- update employee
 -- set employee_name = ?,employee_birthday = ? ,employee_id_card = ? , employee_salary = ?, employee_phone = ?, employee_email = ?, employee_address = ?, position_id = ? ,education_degree_id = ? ,division_id = ?, user_name = ?
 -- where employee_id = ?;
+
+-- select * 
+-- from employee
+-- where employee_name like 'T%';
 
 
 -- insert customer_type 
@@ -69,7 +81,7 @@ values
 
 insert into customer 
 values
- ('KH1234','Nhat Anh','2001/03/13','Male',123456789,0335773638,'NhatAnh@gmail.com','Quảng Bình',3),
+('KH1234','Nhat Anh','2001/03/13','Male',123456789,0335773638,'NhatAnh@gmail.com','Quảng Bình',3),
 ('KH1235','Phúc Duy','1997/03/13','Male',123456789,0335773638,'phucduy@gmail.com','Quảng Ninh',3),
 ('KH1236','Hữu Dự','1991/03/13','Male',123456789,0335773638,'huudu@gmail.com','Quảng Nam',3),
 ('KH1237','Lê Phiên','1999/03/13','Male',123456789,0335773638,'lephien@gmail.com','Đà Nẵng',3),
@@ -90,14 +102,36 @@ values
 -- ,customer_phone = 0335773636 ,customer_email = 'phucduy@gmail.com',customer_address = 'Quảng Ninh',customer_type_id = 2
 -- where customer_id = 7;
 
-select * 
-from customer
-where customer_name like "%T"
-order by customer_name;
+-- select * 
+-- from customer
+-- where customer_name like "%T"
+-- order by customer_name;
 
 
-INSERT INTO customer 
-VALUES ('KH2222','Anh Tâm','2000/03/13','Male',123456789,0335773636,'anhtam@gmail.com','Quảng Nam',3);
+-- select  customer.customer_id,customer.customer_name,customer.customer_birthday,customer.customer_gender,customer.customer_id_card,customer.customer_phone,customer.customer_email,customer.customer_address,customer.customer_type_id,attach_service.attach_service_name
+-- from customer
+-- join contract on customer.customer_id = contract.customer_id
+-- join service on contract.service_id = service.service_id
+-- join contract_detail on contract.contract_id = contract_detail.contract_id
+-- join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id
+-- group by customer.customer_id,attach_service.attach_service_id;
+
+-- select attach_service.attach_service_id,attach_service.attach_service_name,attach_service.attach_service_cost,attach_service.attach_service_unit,attach_service.attach_service_quantity,attach_service.attach_service_status
+-- from customer
+-- join contract on customer.customer_id = contract.customer_id
+-- join service on contract.service_id = service.service_id
+-- join contract_detail on contract.contract_id = contract_detail.contract_id
+-- join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id
+-- group by customer.customer_id,attach_service.attach_service_id;
+
+
+ 
+
+
+
+
+-- INSERT INTO customer 
+-- VALUES ('KH2222','Anh Tâm','2000/03/13','Male',123456789,0335773636,'anhtam@gmail.com','Quảng Nam',3);
 
 -- INSERT INTO customer 
 -- VALUES (?,?,?,?,?,?,?,?,?);
@@ -143,18 +177,29 @@ values
 -- insert contract
 insert into contract
 values 
-("hd1234",'2018/01/06','2020/03/07',1000,1000,'Nv1234','KH1234','DV1234'),
-("hd1235",'2018/02/07','2020/03/08',2000,1000,'Nv1234','KH1234','DV1234'),
-("hd1236",'2019/01/08','2020/03/09',3000,1000,'Nv1234','KH1234','DV1234'),
-("hd1237",'2019/02/09','2020/03/10',4000,1000,'Nv1234','KH1234','Dv1234'),
-("hd1238",'2018/03/10','2020/03/11',5000,1000,'Nv1234','KH1234','Dv1234'),
-("hd1239",'2019/03/11','2020/03/12',6000,1000,'Nv1234','KH1234','Dv1234'),
-("hd1230",'2019/04/12','2020/03/13',7000,1000,'Nv1234','KH1234','Dv1234'),
-("hd1231",'2019/05/13','2020/03/14',8000,1000,'Nv1234','KH1234','Dv1234');
+("HD1234",'2018/01/06','2020/03/07',1000,1000,'NV1234','KH1234','DV1234'),
+("HD1235",'2018/02/07','2020/03/08',2000,1000,'NV1234','KH1234','DV1234'),
+("HD1236",'2019/01/08','2020/03/09',3000,1000,'NV1234','KH1234','DV1234'),
+("HD1237",'2019/02/09','2020/03/10',4000,1000,'NV1234','KH1234','DV1234'),
+("HD1238",'2018/03/10','2020/03/11',5000,1000,'NV1234','KH1234','DV1234'),
+("HD1239",'2019/03/11','2020/03/12',6000,1000,'NV1234','KH1234','DV1234'),
+("HD1230",'2019/04/12','2020/03/13',7000,1000,'NV1234','KH1234','DV1234'),
+("HD1231",'2019/05/13','2020/03/14',8000,1000,'NV1234','KH1234','DV1234');
 
 -- update contract 
 -- set contract_start_date = '2018/01/06',contract_end_date = '2020/03/07' ,contract_deposit = 10000 , contract_total_money = 1000, employee_id = 'Nv1234', customer_id = 'KH1234', service_id = 'DV1234'
 -- where contract_id = "hd1234";
+
+
+-- select contract.contract_id,contract.contract_start_date,contract.contract_end_date,contract.contract_deposit
+-- ,sum((attach_service.attach_service_quantity*rent_type.rent_type_cost) + service.service_cost) as contract_total_money,contract.employee_id,
+-- contract.customer_id, contract.service_id
+-- from contract
+-- left join contract_detail on contract.contract_id = contract_detail.contract_id
+-- left join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id
+-- left join service on contract.service_id = service.service_id
+-- left join rent_type on service.rent_type_id = rent_type.rent_type_id
+-- group by contract.contract_id;S
 
 
 -- insert attach_service
@@ -169,12 +214,12 @@ values
 insert into contract_detail
 (contract_id,attach_service_id)
 values 
-('hd1234',1),
-('hd1234',1),
-('hd1234',1),
-('hd1234',1),
-('hd1234',1),
-('hd1234',1);
+('HD1234',1),
+('HD1234',1),
+('HD1234',1),
+('HD1234',1),
+('HD1234',1),
+('HD1234',1);
 
 -- insert into contract_detail
 -- (contract_id,attach_service_id)

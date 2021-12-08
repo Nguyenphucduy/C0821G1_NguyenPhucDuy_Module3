@@ -10,6 +10,9 @@
 </div>
 <div>
     <p style="color: red"><c:out value="${msg}"/></p>
+    <h3 style="color: blue">
+        Welcome, <%=request.getSession().getAttribute("usernameSession")%>
+    </h3>
 
 </div>
 
@@ -33,15 +36,15 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="contractDetail" items="${contractDetailList}">
+    <c:forEach var="contract_detail" items="${contractDetailList}">
         <tr>
-            <td><c:out value="${contractDetail.contractDetailCode}"/></td>
-            <td><c:out value="${contractDetail.contractCode}"/></td>
-            <td><c:out value="${contractDetail.attachServiceCode}"/></td>
+            <td><c:out value="${contract_detail.contractDetailCode}"/></td>
+            <td><c:out value="${contract_detail.contractCode}"/></td>
+            <td><c:out value="${contract_detail.attachServiceCode}"/></td>
 
 
-            <td><a href="/contract_detail_servlet?choose=edit&contractDetailCode=${contractDetail.contractDetailCode}">edit</a></td>
-            <td><a href="/contract_detail_servlet?choose=delete&contractDetailCode=${contractDetail.contractDetailCode}">delete</a></td>
+            <td><a href="/contract_detail_servlet?choose=edit&contractDetailCode=${contract_detail.contractDetailCode}">edit</a></td>
+            <td><a href="/contract_detail_servlet?choose=delete&contractDetailCode=${contract_detail.contractDetailCode}">delete</a></td>
         </tr>
     </c:forEach>
 </table>

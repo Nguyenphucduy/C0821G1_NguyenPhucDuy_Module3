@@ -1,6 +1,9 @@
 package furama_resort.controller;
 
 import furama_resort.bean.Contract;
+import furama_resort.bean.Customer;
+import furama_resort.bean.Employee;
+import furama_resort.bean.ServiceResort;
 import furama_resort.service.IService;
 import furama_resort.service.impl.Service;
 
@@ -50,7 +53,12 @@ public class ContractServlet extends HttpServlet {
         String customerCode = request.getParameter("customerCode");
         String serviceCode = request.getParameter("serviceCode");
         Contract contract = new Contract(contractCode, contractStartDate, contractEndDate, contractDeposit, contractTotalMoney, employeeCode, customerCode, serviceCode);
-        iService.editContract(contract);
+        boolean check = iService.editContract(contract);
+        if (!check){
+            request.setAttribute("messenger","Error Validate");
+        }else {
+            request.setAttribute("messenger","Update Done");
+        }
         getListContract(request, response);
     }
 
@@ -64,7 +72,13 @@ public class ContractServlet extends HttpServlet {
         String customerCode = request.getParameter("customerCode");
         String serviceCode = request.getParameter("serviceCode");
         Contract contract = new Contract(contractCode, contractStartDate, contractEndDate, contractDeposit, contractTotalMoney, employeeCode, customerCode, serviceCode);
-        iService.createContract(contract);
+
+        boolean check = iService.createContract(contract);
+        if (!check){
+            request.setAttribute("messenger","Error Validate");
+        }else {
+            request.setAttribute("messenger","Create Done");
+        }
         getListContract(request, response);
 
     }
@@ -98,6 +112,12 @@ public class ContractServlet extends HttpServlet {
     private void goPageEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String code = request.getParameter("contractCode");
         Contract contract = iService.selectByContractCode(code);
+        List<Employee> employeeList = iService.getListEmployee();
+        List<Customer> customerList = iService.getListCustomer();
+        List<ServiceResort> serviceResortList = iService.getListSerVice();
+        request.setAttribute("employeeList",employeeList);
+        request.setAttribute("customerList",customerList);
+        request.setAttribute("serviceResortList",serviceResortList);
         request.setAttribute("contract",contract);
         request.getRequestDispatcher("furama/contract/edit.jsp").forward(request,response);
 
@@ -110,6 +130,12 @@ public class ContractServlet extends HttpServlet {
     }
 
     private void goPageCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Employee> employeeList = iService.getListEmployee();
+        List<Customer> customerList = iService.getListCustomer();
+        List<ServiceResort> serviceResortList = iService.getListSerVice();
+        request.setAttribute("employeeList",employeeList);
+        request.setAttribute("customerList",customerList);
+        request.setAttribute("serviceResortList",serviceResortList);
         request.getRequestDispatcher("furama/contract/create.jsp").forward(request,response);
     }
 

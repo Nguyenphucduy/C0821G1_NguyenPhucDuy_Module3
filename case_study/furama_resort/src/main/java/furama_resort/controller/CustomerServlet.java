@@ -2,6 +2,8 @@ package furama_resort.controller;
 
 import furama_resort.bean.Customer;
 import furama_resort.service.IService;
+import furama_resort.service.customer.IServiceCustomer;
+import furama_resort.service.customer.impl.ServiceCustomer;
 import furama_resort.service.impl.Service;
 
 import javax.servlet.RequestDispatcher;
@@ -17,7 +19,7 @@ import java.util.List;
 @WebServlet(name = "CustomerServlet" ,urlPatterns = "/customer_servlet")
 public class CustomerServlet extends HttpServlet {
 
-    IService iService = new Service();
+    IServiceCustomer iServiceCustomer = new ServiceCustomer();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String choose = request.getParameter("choose");
 
@@ -43,7 +45,7 @@ public class CustomerServlet extends HttpServlet {
 
     private void SearchData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("nameCustomer");
-        List<Customer> customerList = iService.selectByName(name);
+        List<Customer> customerList = iServiceCustomer.selectByName(name);
         request.setAttribute("customerList",customerList);
         request.getRequestDispatcher("furama/customer/list.jsp").forward(request, response);
     }
@@ -61,7 +63,12 @@ public class CustomerServlet extends HttpServlet {
         // Truyền tham số theo đúng thứ tự constructor
         Customer customer = new Customer(name,dateOfBirth,gender,idCard,phone,email,customerCode,address,typeId);
 
-        iService.updateData(customer);
+        boolean check = iServiceCustomer.updateData(customer);
+        if (!check){
+            request.setAttribute("messenger","Error Validate");
+        }else {
+            request.setAttribute("messenger","Update Done");
+        }
         getListCustomer(request,response);
     }
 
@@ -86,7 +93,13 @@ public class CustomerServlet extends HttpServlet {
 //        customer.setAddress(address);
 //        customer.setCustomerType(typeId);
 
-        this.iService.createCustomer(customer);
+        boolean checkValidate = this.iServiceCustomer.createCustomer(customer);
+
+        if(checkValidate) {
+            request.setAttribute("messenger", "successfully added new");
+        } else {
+            request.setAttribute("messenger","new add failure");
+        }
 
         getListCustomer(request,response);
 
@@ -120,7 +133,7 @@ public class CustomerServlet extends HttpServlet {
 
     private void goPageEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String customerCode = request.getParameter("customerCode");
-        Customer customer = iService.selectByCustomerCode(customerCode);
+        Customer customer = iServiceCustomer.selectByCustomerCode(customerCode);
         RequestDispatcher dispatcher = request.getRequestDispatcher("furama/customer/edit.jsp");
         request.setAttribute("customer", customer);
         dispatcher.forward(request, response);
@@ -128,13 +141,16 @@ public class CustomerServlet extends HttpServlet {
 
     private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String customerCode = request.getParameter("customerCode");
-        iService.deleteCustomer(customerCode);
+        iServiceCustomer.deleteCustomer(customerCode);
         getListCustomer(request,response);
     }
 
     private void getListCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Customer> customerList = iService.getListCustomer();
+        List<Customer> customerList = iServiceCustomer.getListCustomer();
+        if (customerList.size()==0){
+            request.setAttribute("messenger","empty list");
+        }
         request.setAttribute("customerList", customerList);
         request.getRequestDispatcher("furama/customer/list.jsp").forward(request, response);
     }

@@ -42,12 +42,25 @@
 
             <tr>
                 <td>Service Type Id: </td>
-                <td><input type="text" name="serviceTypeId" ></td>
+                <td>
+                    <select name="serviceTypeId" >
+                        <option value="1">Villa</option>
+                        <option value="2">House</option>
+                        <option value="3">Room</option>
+                    </select>
+                </td>
             </tr>
 
             <tr>
                 <td>Service Rental Type: </td>
-                <td><input type="text" name="rentalType" ></td>
+                <td>
+                    <select name="rentalType" >
+                        <option value="1">Year</option>
+                        <option value="2">Month</option>
+                        <option value="3">Day</option>
+                        <option value="4">House</option>
+                    </select>
+                </td>
             </tr>
 
             <tr>

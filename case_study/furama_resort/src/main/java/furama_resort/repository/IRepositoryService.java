@@ -55,4 +55,12 @@ public interface IRepositoryService {
     List<ContractDetail> getListContractDetail();
 
     void createContractDetail(ContractDetail contractDetail) throws SQLException;
+
+    List<Customer> getListCustomerUsingService();
+
+    List<ServiceAttach> getListAttachService();
+
+    void createUserEmployee(UserEmployee userEmployee) throws SQLException;
+
+    void createUserEmployeeMore(UserEmployee userEmployee) throws SQLException;
 }

@@ -9,7 +9,10 @@
     <h2>List Contract</h2>
 </div>
 <div>
-    <p style="color: red"><c:out value="${msg}"/></p>
+    <h3 style="color: green"><c:out value="${messenger}"/></h3>
+    <h3 style="color: blue">
+        Welcome, <%=request.getSession().getAttribute("usernameSession")%>
+    </h3>
 
 </div>
 
@@ -25,6 +28,7 @@
 <%--    </form>--%>
 </div>
 
+
 <table border="1">
     <tr>
         <td>Id Contract</td>
@@ -38,24 +42,29 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="contractDetail" items="${contractList}">
+    <c:forEach var="contract_detail" items="${contractList}">
         <tr>
-            <td><c:out value="${contractDetail.contractCode}"/></td>
-            <td><c:out value="${contractDetail.contractStartDate}"/></td>
-            <td><c:out value="${contractDetail.contractEndDate}"/></td>
-            <td><c:out value="${contractDetail.contractDeposit}"/></td>
-            <td><c:out value="${contractDetail.contractTotalMoney}"/></td>
-            <td><c:out value="${contractDetail.employeeCode}"/></td>
-            <td><c:out value="${contractDetail.customerCode}"/></td>
-            <td><c:out value="${contractDetail.serviceCode}"/></td>
+            <td><c:out value="${contract_detail.contractCode}"/></td>
+            <td><c:out value="${contract_detail.contractStartDate}"/></td>
+            <td><c:out value="${contract_detail.contractEndDate}"/></td>
+            <td><c:out value="${contract_detail.contractDeposit}"/></td>
+            <td><c:out value="${contract_detail.contractTotalMoney}"/></td>
+            <td><c:out value="${contract_detail.employeeCode}"/></td>
+            <td><c:out value="${contract_detail.customerCode}"/></td>
+            <td><c:out value="${contract_detail.serviceCode}"/></td>
 
 
-            <td><a href="/contract_servlet?choose=edit&contractCode=${contractDetail.contractCode}">edit</a></td>
-            <td><a href="/contract_servlet?choose=delete&contractCode=${contractDetail.contractCode}">delete</a></td>
+            <td><a href="/contract_servlet?choose=edit&contractCode=${contract_detail.contractCode}">edit</a></td>
+            <td><a href="/contract_servlet?choose=delete&contractCode=${contract_detail.contractCode}"
+                   onclick="return confirm('Are you sure you want to delete this item?')" >delete</a></td>
         </tr>
     </c:forEach>
 </table>
-
+<div>
+    <a href="/contract_detail_servlet?choose=create">
+        <button>Create Contract Detail</button>
+    </a>
+</div>
 </body>
 </html>
 

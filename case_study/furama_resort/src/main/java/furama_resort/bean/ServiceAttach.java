@@ -1,21 +1,31 @@
 package furama_resort.bean;
 
 public class ServiceAttach {
+    private int attachServiceCode;
     private String attachServiceName;
     private String attachServiceUnit;
     private double attachServiceCost;
     private Integer attachServiceQuantity;
-    private Boolean attachServiceStatus;
+    private String attachServiceStatus;
 
     public ServiceAttach() {
     }
 
-    public ServiceAttach(String attachServiceName, String attachServiceUnit, double attachServiceCost, Integer attachServiceQuantity, Boolean attachServiceStatus) {
+    public ServiceAttach(int attachServiceCode, String attachServiceName, String attachServiceUnit, double attachServiceCost, Integer attachServiceQuantity, String attachServiceStatus) {
+        this.attachServiceCode = attachServiceCode;
         this.attachServiceName = attachServiceName;
         this.attachServiceUnit = attachServiceUnit;
         this.attachServiceCost = attachServiceCost;
         this.attachServiceQuantity = attachServiceQuantity;
         this.attachServiceStatus = attachServiceStatus;
+    }
+
+    public int getAttachServiceCode() {
+        return attachServiceCode;
+    }
+
+    public void setAttachServiceCode(int attachServiceCode) {
+        this.attachServiceCode = attachServiceCode;
     }
 
     public String getAttachServiceName() {
@@ -50,11 +60,11 @@ public class ServiceAttach {
         this.attachServiceQuantity = attachServiceQuantity;
     }
 
-    public Boolean getAttachServiceStatus() {
+    public String getAttachServiceStatus() {
         return attachServiceStatus;
     }
 
-    public void setAttachServiceStatus(Boolean attachServiceStatus) {
+    public void setAttachServiceStatus(String attachServiceStatus) {
         this.attachServiceStatus = attachServiceStatus;
     }
 }

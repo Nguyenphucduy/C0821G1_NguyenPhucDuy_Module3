@@ -1,8 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <html>
 <head>
     <title>Create new customer</title>
+    <meta charset="UTF-8">
     <style>
         .message{
             color:green;
@@ -58,7 +60,15 @@
             </tr>
             <tr>
                 <td>Customer type id: </td>
-                <td><input type="text" name="typeIdCustomer" ></td>
+                <td>
+                <select name="typeIdCustomer" >
+                    <option value="1">Diamond</option>
+                    <option value="2">Platinium</option>
+                    <option value="3">Gold</option>
+                    <option value="4">Silver</option>
+                    <option value="5">Member</option>
+                </select>
+                </td>
             </tr>
             <tr>
                 <td><input type="submit" value="Create Customer"></td>

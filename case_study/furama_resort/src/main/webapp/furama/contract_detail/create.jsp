@@ -23,11 +23,27 @@
 <%--            </tr>--%>
             <tr>
                 <td>contract Code: </td>
-                <td><input type="text" name="contractCode" ></td>
+                <td>
+                    <select name="contractCode">
+                        <c:forEach var="contract" items="${contractList}">
+                            <option value="<c:out value="${contract.contractCode}"/>"><c:out value="${contract.contractCode}"/></option>
+                        </c:forEach>
+                    </select>
+                </td>
+<%--                <td><input type="text" name="contractCode" ></td>--%>
             </tr>
             <tr>
                 <td>attach Service Code: </td>
-                <td><input type="text" name="attachServiceCode" ></td>
+                <td>
+                    <select name="attachServiceCode" >
+                        <option value="1">Massage</option>
+                        <option value="2">Karaoke</option>
+                        <option value="3">Thức ăn</option>
+                        <option value="4">Nước uống</option>
+                        <option value="5">Thuê xe di chuyển thăm quan resort</option>
+                    </select>
+                </td>
+<%--                <td><input type="text" name="attachServiceCode" ></td>--%>
             </tr>
             <tr>
                 <td><input type="submit" value="Create"></td>

@@ -9,7 +9,10 @@
     <h2>List Service</h2>
 </div>
 <div>
-    <p style="color: red"><c:out value="${msg}"/></p>
+    <h3 style="color: green"><c:out value="${messenger}"/></h3>
+    <h3 style="color: blue">
+        Welcome, <%=request.getSession().getAttribute("usernameSession")%>
+    </h3>
 
 </div>
 
@@ -17,13 +20,22 @@
     <a href="/service_servlet?choose=create">
         <button>Create Service</button>
     </a>
+</div>
+<div>
+    <a href="/service_servlet?choose=getListCustomer">
+        <button>Get List Customer Using Service</button>
+    </a>
 
+</div>
+
+<div>
     <form method="post" action="/service_servlet">
         <input type="hidden" name="choose" value="search">
         <input type="text" name="nameService">
         <button>Search</button>
     </form>
 </div>
+
 
 <table border="1">
     <tr>
@@ -41,31 +53,24 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="contractDetail" items="${serviceResortList}">
+    <c:forEach var="contract_detail" items="${serviceResortList}">
         <tr>
-            <td><c:out value="${contractDetail.codeService}"/></td>
-            <td><c:out value="${contractDetail.nameService}"/></td>
-            <td><c:out value="${contractDetail.usableArea}"/></td>
-            <td>
-                    <%--                <c:if test="${customer.gender == 1}">--%>
-                    <%--                    Male--%>
-                    <%--                </c:if>--%>
-                    <%--                <c:if test="${customer.gender == 0}">--%>
-                    <%--                    Famale--%>
-                    <%--                </c:if>--%>
-                <c:out value="${contractDetail.rentCost}"/>
-            </td>
-            <td><c:out value="${contractDetail.numberOfPeople}"/></td>
-            <td><c:out value="${contractDetail.serviceTypeId}"/></td>
-            <td><c:out value="${contractDetail.rentalType}"/></td>
-            <td><c:out value="${contractDetail.standardRoom}"/></td>
-            <td><c:out value="${contractDetail.descriptionOtherConvenience}"/></td>
-            <td><c:out value="${contractDetail.poolArea}"/></td>
-            <td><c:out value="${contractDetail.numberOfFloors}"/></td>
+            <td><c:out value="${contract_detail.codeService}"/></td>
+            <td><c:out value="${contract_detail.nameService}"/></td>
+            <td><c:out value="${contract_detail.usableArea}"/></td>
+            <td><c:out value="${contract_detail.rentCost}"/></td>
+            <td><c:out value="${contract_detail.numberOfPeople}"/></td>
+            <td><c:out value="${contract_detail.serviceTypeId}"/></td>
+            <td><c:out value="${contract_detail.rentalType}"/></td>
+            <td><c:out value="${contract_detail.standardRoom}"/></td>
+            <td><c:out value="${contract_detail.descriptionOtherConvenience}"/></td>
+            <td><c:out value="${contract_detail.poolArea}"/></td>
+            <td><c:out value="${contract_detail.numberOfFloors}"/></td>
 
 
-            <td><a href="/service_servlet?choose=edit&codeService=${contractDetail.codeService}">edit</a></td>
-            <td><a href="/service_servlet?choose=delete&codeService=${contractDetail.codeService}">delete</a></td>
+            <td><a href="/service_servlet?choose=edit&codeService=${contract_detail.codeService}">edit</a></td>
+            <td><a href="/service_servlet?choose=delete&codeService=${contract_detail.codeService}"
+                   onclick="return confirm('Are you sure you want to delete this item?')">delete</a></td>
         </tr>
     </c:forEach>
 </table>
