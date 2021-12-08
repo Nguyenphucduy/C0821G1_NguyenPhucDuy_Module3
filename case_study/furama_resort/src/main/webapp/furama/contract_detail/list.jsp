@@ -36,15 +36,15 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="contract_detail" items="${contractDetailList}">
+    <c:forEach var="totalMoney" items="${contractDetailList}">
         <tr>
-            <td><c:out value="${contract_detail.contractDetailCode}"/></td>
-            <td><c:out value="${contract_detail.contractCode}"/></td>
-            <td><c:out value="${contract_detail.attachServiceCode}"/></td>
+            <td><c:out value="${totalMoney.contractDetailCode}"/></td>
+            <td><c:out value="${totalMoney.contractCode}"/></td>
+            <td><c:out value="${totalMoney.attachServiceCode}"/></td>
 
 
-            <td><a href="/contract_detail_servlet?choose=edit&contractDetailCode=${contract_detail.contractDetailCode}">edit</a></td>
-            <td><a href="/contract_detail_servlet?choose=delete&contractDetailCode=${contract_detail.contractDetailCode}">delete</a></td>
+            <td><a href="/contract_detail_servlet?choose=edit&contractDetailCode=${totalMoney.contractDetailCode}">edit</a></td>
+            <td><a href="/contract_detail_servlet?choose=delete&contractDetailCode=${totalMoney.contractDetailCode}">delete</a></td>
         </tr>
     </c:forEach>
 </table>

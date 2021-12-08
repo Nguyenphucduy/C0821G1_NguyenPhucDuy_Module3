@@ -3,10 +3,10 @@ package furama_resort.service.customer.impl;
 import furama_resort.bean.Customer;
 import furama_resort.common.ICommon;
 import furama_resort.common.impl.Validate;
-import furama_resort.repository.IRepositoryService;
+
 import furama_resort.repository.customer.IRepositoryCustomer;
 import furama_resort.repository.customer.impl.RepositoryCustomer;
-import furama_resort.repository.impl.RepositoryService;
+
 import furama_resort.service.customer.IServiceCustomer;
 
 import java.sql.SQLException;

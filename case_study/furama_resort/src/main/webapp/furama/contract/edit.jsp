@@ -71,8 +71,8 @@
                 </td>
                 <td>
                     <select name="customerCode">
-                        <c:forEach var="contract_detail" items="${customerList}">
-                            <option value="<c:out value="${contract_detail.customerCode}"/>"><c:out value="${contract_detail.customerCode}"/></option>
+                        <c:forEach var="totalMoney" items="${customerList}">
+                            <option value="<c:out value="${totalMoney.customerCode}"/>"><c:out value="${totalMoney.customerCode}"/></option>
                         </c:forEach>
                     </select>
                 </td>

@@ -1,10 +1,8 @@
 package furama_resort.controller;
 
 import furama_resort.bean.Customer;
-import furama_resort.service.IService;
 import furama_resort.service.customer.IServiceCustomer;
 import furama_resort.service.customer.impl.ServiceCustomer;
-import furama_resort.service.impl.Service;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -150,9 +148,10 @@ public class CustomerServlet extends HttpServlet {
         List<Customer> customerList = iServiceCustomer.getListCustomer();
         if (customerList.size()==0){
             request.setAttribute("messenger","empty list");
+        }else {
+            request.setAttribute("customerList", customerList);
+            request.getRequestDispatcher("furama/customer/list.jsp").forward(request, response);
         }
-        request.setAttribute("customerList", customerList);
-        request.getRequestDispatcher("furama/customer/list.jsp").forward(request, response);
     }
 
 

@@ -49,24 +49,24 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="contract_detail" items="${employeeList}">
+    <c:forEach var="totalMoney" items="${employeeList}">
         <tr>
-            <td><c:out value="${contract_detail.employeeCode}"/></td>
-            <td><c:out value="${contract_detail.fullName}"/></td>
-            <td><c:out value="${contract_detail.dateOfBirth}"/></td>
-            <td><c:out value="${contract_detail.identityCardNumber}"/></td>
-            <td><c:out value="${contract_detail.phoneNumber}"/></td>
-            <td><c:out value="${contract_detail.email}"/></td>
-            <td><c:out value="${contract_detail.salary}"/></td>
-            <td><c:out value="${contract_detail.address}"/></td>
-            <td><c:out value="${contract_detail.position}"/></td>
-            <td><c:out value="${contract_detail.educationDegree}"/></td>
-            <td><c:out value="${contract_detail.division}"/></td>
-            <td><c:out value="${contract_detail.userName}"/></td>
+            <td><c:out value="${totalMoney.employeeCode}"/></td>
+            <td><c:out value="${totalMoney.fullName}"/></td>
+            <td><c:out value="${totalMoney.dateOfBirth}"/></td>
+            <td><c:out value="${totalMoney.identityCardNumber}"/></td>
+            <td><c:out value="${totalMoney.phoneNumber}"/></td>
+            <td><c:out value="${totalMoney.email}"/></td>
+            <td><c:out value="${totalMoney.salary}"/></td>
+            <td><c:out value="${totalMoney.address}"/></td>
+            <td><c:out value="${totalMoney.position}"/></td>
+            <td><c:out value="${totalMoney.educationDegree}"/></td>
+            <td><c:out value="${totalMoney.division}"/></td>
+            <td><c:out value="${totalMoney.userName}"/></td>
 
 
-            <td><a href="/employee_servlet?choose=edit&employeeCode=${contract_detail.employeeCode}">edit</a></td>
-            <td><a href="/employee_servlet?choose=delete&employeeCode=${contract_detail.employeeCode}"
+            <td><a href="/employee_servlet?choose=edit&employeeCode=${totalMoney.employeeCode}">edit</a></td>
+            <td><a href="/employee_servlet?choose=delete&employeeCode=${totalMoney.employeeCode}"
                    onclick="return confirm('Are you sure you want to delete this item?')" >delete</a></td>
         </tr>
     </c:forEach>

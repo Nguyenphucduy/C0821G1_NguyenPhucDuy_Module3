@@ -2,7 +2,7 @@ package furama_resort.repository.customer.impl;
 
 import furama_resort.bean.Customer;
 import furama_resort.repository.customer.IRepositoryCustomer;
-import furama_resort.repository.impl.BaseRepository;
+import furama_resort.repository.BaseRepository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

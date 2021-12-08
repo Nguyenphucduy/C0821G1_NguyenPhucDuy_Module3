@@ -27,6 +27,12 @@
     </a>
 
 </div>
+<div>
+    <a href="/service_servlet?choose=totalMoney">
+        <button>Get List Total Money Service</button>
+    </a>
+
+</div>
 
 <div>
     <form method="post" action="/service_servlet">
@@ -53,23 +59,23 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="contract_detail" items="${serviceResortList}">
+    <c:forEach var="totalMoney" items="${serviceResortList}">
         <tr>
-            <td><c:out value="${contract_detail.codeService}"/></td>
-            <td><c:out value="${contract_detail.nameService}"/></td>
-            <td><c:out value="${contract_detail.usableArea}"/></td>
-            <td><c:out value="${contract_detail.rentCost}"/></td>
-            <td><c:out value="${contract_detail.numberOfPeople}"/></td>
-            <td><c:out value="${contract_detail.serviceTypeId}"/></td>
-            <td><c:out value="${contract_detail.rentalType}"/></td>
-            <td><c:out value="${contract_detail.standardRoom}"/></td>
-            <td><c:out value="${contract_detail.descriptionOtherConvenience}"/></td>
-            <td><c:out value="${contract_detail.poolArea}"/></td>
-            <td><c:out value="${contract_detail.numberOfFloors}"/></td>
+            <td><c:out value="${totalMoney.codeService}"/></td>
+            <td><c:out value="${totalMoney.nameService}"/></td>
+            <td><c:out value="${totalMoney.usableArea}"/></td>
+            <td><c:out value="${totalMoney.rentCost}"/></td>
+            <td><c:out value="${totalMoney.numberOfPeople}"/></td>
+            <td><c:out value="${totalMoney.serviceTypeId}"/></td>
+            <td><c:out value="${totalMoney.rentalType}"/></td>
+            <td><c:out value="${totalMoney.standardRoom}"/></td>
+            <td><c:out value="${totalMoney.descriptionOtherConvenience}"/></td>
+            <td><c:out value="${totalMoney.poolArea}"/></td>
+            <td><c:out value="${totalMoney.numberOfFloors}"/></td>
 
 
-            <td><a href="/service_servlet?choose=edit&codeService=${contract_detail.codeService}">edit</a></td>
-            <td><a href="/service_servlet?choose=delete&codeService=${contract_detail.codeService}"
+            <td><a href="/service_servlet?choose=edit&codeService=${totalMoney.codeService}">edit</a></td>
+            <td><a href="/service_servlet?choose=delete&codeService=${totalMoney.codeService}"
                    onclick="return confirm('Are you sure you want to delete this item?')">delete</a></td>
         </tr>
     </c:forEach>

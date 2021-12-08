@@ -37,7 +37,7 @@ service_type_name varchar(50) not null
 
 create table `user` (
 user_name varchar(50) not null primary key,
-`password` varchar(50) 
+`password` varchar(50) not null 
 );
 
 create table `role` (

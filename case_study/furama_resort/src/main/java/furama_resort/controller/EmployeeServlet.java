@@ -1,12 +1,14 @@
 package furama_resort.controller;
 
 import furama_resort.bean.Employee;
-import furama_resort.bean.ServiceResort;
+
 import furama_resort.bean.UserEmployee;
-import furama_resort.service.IService;
+
 import furama_resort.service.employee.IServiceEmployee;
 import furama_resort.service.employee.impl.ServiceEmployee;
-import furama_resort.service.impl.Service;
+
+import furama_resort.service.user.IUserService;
+import furama_resort.service.user.impl.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +21,8 @@ import java.util.List;
 
 @WebServlet(name = "EmployeeServlet" , urlPatterns = "/employee_servlet")
 public class EmployeeServlet extends HttpServlet {
-    IService iService = new Service();
     IServiceEmployee iServiceEmployee = new ServiceEmployee();
+    IUserService iUserService = new UserService();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String choose = request.getParameter("choose");
 
@@ -56,7 +58,7 @@ public class EmployeeServlet extends HttpServlet {
         UserEmployee userEmployee = new UserEmployee();
         userEmployee.setUserName(request.getParameter("userName"));
         userEmployee.setPassword(request.getParameter("userPassword"));
-        iService.createUserEmployee(userEmployee);
+        iUserService.createUserEmployee(userEmployee);
         getListEmployee(request,response);
     }
 
@@ -91,10 +93,9 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     private void createEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-        UserEmployee userEmployee = new UserEmployee();
-        userEmployee.setUserName(request.getParameter("userName"));
-        iService.createUserEmployeeMore(userEmployee);
-
+//        UserEmployee userEmployee = new UserEmployee();
+//        userEmployee.setUserName(request.getParameter("userName"));
+//        iUserService.createUserEmployeeMore(userEmployee);
 
         Employee employee = new Employee();
         employee.setEmployeeCode(request.getParameter("employeeCode"));
@@ -128,7 +129,7 @@ public class EmployeeServlet extends HttpServlet {
         }
         switch (choose) {
             case "create":
-                goPageCreate(request,response);
+                goPageCreateEmployee(request,response);
                 break;
             case "createUser":
                 goPageCreateUser(request,response);
@@ -166,14 +167,21 @@ public class EmployeeServlet extends HttpServlet {
         getListEmployee(request,response);
     }
 
-    private void goPageCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void goPageCreateEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<UserEmployee> userEmployeeList = iUserService.getListUser();
+        request.setAttribute("userEmployeeList",userEmployeeList);
         request.getRequestDispatcher("furama/employee/create.jsp").forward(request, response);
     }
 
     private void getListEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Employee> employeeList = iServiceEmployee.getListEmployee();
 
-        request.setAttribute("employeeList",employeeList);
-        request.getRequestDispatcher("furama/employee/list.jsp").forward(request,response);
+        List<Employee> employeeList = iServiceEmployee.getListEmployee();
+        if (employeeList .size()==0){
+            request.setAttribute("messenger","empty list");
+        }else {
+            request.setAttribute("employeeList",employeeList);
+            request.getRequestDispatcher("furama/employee/list.jsp").forward(request,response);
+        }
+
     }
 }

@@ -15,7 +15,11 @@ public class ServiceEmployee implements IServiceEmployee {
     IRepositoryEmployee iRepositoryEmployee = new RepositoryEmployee();
     @Override
     public List<Employee> getListEmployee() {
-        return iRepositoryEmployee.getListEmployee();
+        if (iRepositoryEmployee.getListEmployee().size()==0){
+            return null;
+        }else {
+            return iRepositoryEmployee.getListEmployee();
+        }
     }
 
     @Override

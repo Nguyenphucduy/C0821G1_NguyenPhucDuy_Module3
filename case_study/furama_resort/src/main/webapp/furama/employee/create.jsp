@@ -89,7 +89,14 @@
             </tr>
             <tr>
                 <td>Employee User Name: </td>
-                <td><input type="text" name="userName" ></td>
+                <td>
+                    <select name="userName">
+                        <c:forEach var="user" items="${userEmployeeList}">
+                            <option value="<c:out value="${user.userName}"/>"><c:out value="${user.userName}"/></option>
+                        </c:forEach>
+                    </select>
+                </td>
+<%--                <td><input type="text" name="userName" ></td>--%>
             </tr>
             <tr>
                 <td><input type="submit" value="Create Employee" ></td>

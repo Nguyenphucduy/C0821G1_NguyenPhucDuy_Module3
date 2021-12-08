@@ -2,7 +2,7 @@ package furama_resort.repository.employee.impl;
 
 import furama_resort.bean.Employee;
 import furama_resort.repository.employee.IRepositoryEmployee;
-import furama_resort.repository.impl.BaseRepository;
+import furama_resort.repository.BaseRepository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

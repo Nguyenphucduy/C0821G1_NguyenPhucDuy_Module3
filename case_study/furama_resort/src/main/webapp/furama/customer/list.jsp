@@ -43,22 +43,22 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="contract_detail" items="${customerList}">
+    <c:forEach var="totalMoney" items="${customerList}">
         <tr>
-            <td><c:out value="${contract_detail.customerCode}"/></td>
-            <td><c:out value="${contract_detail.fullName}"/></td>
-            <td><c:out value="${contract_detail.dateOfBirth}"/></td>
-            <td><c:out value="${contract_detail.gender}"/></td>
-            <td><c:out value="${contract_detail.identityCardNumber}"/></td>
-            <td><c:out value="${contract_detail.phoneNumber}"/></td>
-            <td><c:out value="${contract_detail.email}"/></td>
-            <td><c:out value="${contract_detail.address}"/></td>
-            <td><c:out value="${contract_detail.customerType}"/></td>
+            <td><c:out value="${totalMoney.customerCode}"/></td>
+            <td><c:out value="${totalMoney.fullName}"/></td>
+            <td><c:out value="${totalMoney.dateOfBirth}"/></td>
+            <td><c:out value="${totalMoney.gender}"/></td>
+            <td><c:out value="${totalMoney.identityCardNumber}"/></td>
+            <td><c:out value="${totalMoney.phoneNumber}"/></td>
+            <td><c:out value="${totalMoney.email}"/></td>
+            <td><c:out value="${totalMoney.address}"/></td>
+            <td><c:out value="${totalMoney.customerType}"/></td>
 
 
 
-            <td><a href="/customer_servlet?choose=edit&customerCode=${contract_detail.customerCode}">edit</a></td>
-            <td><a href="/customer_servlet?choose=delete&customerCode=${contract_detail.customerCode}"
+            <td><a href="/customer_servlet?choose=edit&customerCode=${totalMoney.customerCode}">edit</a></td>
+            <td><a href="/customer_servlet?choose=delete&customerCode=${totalMoney.customerCode}"
             onclick="return confirm('Are you sure you want to delete this item?')" >delete</a></td>
 
         </tr>

@@ -2,8 +2,11 @@ package furama_resort.controller;
 
 import furama_resort.bean.Contract;
 import furama_resort.bean.ContractDetail;
-import furama_resort.service.IService;
-import furama_resort.service.impl.Service;
+import furama_resort.service.contract.IServiceContract;
+import furama_resort.service.contract.impl.ServiceContract;
+import furama_resort.service.contract_detail.IServiceContractDetail;
+import furama_resort.service.contract_detail.impl.ServiceContractDetail;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +19,8 @@ import java.util.List;
 
 @WebServlet(name = "ContractDetailServlet" , urlPatterns = "/contract_detail_servlet")
 public class ContractDetailServlet extends HttpServlet {
-    IService service = new Service();
+    IServiceContractDetail iServiceContractDetail = new ServiceContractDetail();
+    IServiceContract iServiceContract = new ServiceContract();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String choose = request.getParameter("choose");
 
@@ -43,7 +47,7 @@ public class ContractDetailServlet extends HttpServlet {
         String contractCode = request.getParameter("contractCode");
         int attachServiceCode = Integer.parseInt(request.getParameter("attachServiceCode"));
         ContractDetail contractDetail = new ContractDetail(contractCode,attachServiceCode);
-        service.createContractDetail(contractDetail);
+        iServiceContractDetail.createContractDetail(contractDetail);
         getListContractDetail(request,response);
     }
 
@@ -68,13 +72,13 @@ public class ContractDetailServlet extends HttpServlet {
     }
 
     private void goPageCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Contract> contractList = service.getListContract();
+        List<Contract> contractList = iServiceContract.getListContract();
         request.setAttribute("contractList",contractList);
         request.getRequestDispatcher("furama/contract_detail/create.jsp").forward(request, response);
     }
 
     private void getListContractDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<ContractDetail>  contractDetailList = service.getListContractDetail();
+        List<ContractDetail>  contractDetailList = iServiceContractDetail.getListContractDetail();
         request.setAttribute("contractDetailList",contractDetailList);
         request.getRequestDispatcher("furama/contract_detail/list.jsp").forward(request, response);
     }
