@@ -26,19 +26,19 @@
         <td>Address</td>
         <td>Type Id</td>
     </tr>
-    <c:forEach var="totalMoney" items="${customerListUsingService}">
+    <c:forEach var="customer" items="${customerListUsingService}">
         <tr>
-            <td><c:out value="${totalMoney.customerCode}"/></td>
-            <td><c:out value="${totalMoney.fullName}"/></td>
-            <td><c:out value="${totalMoney.dateOfBirth}"/></td>
+            <td><c:out value="${customer.customerCode}"/></td>
+            <td><c:out value="${customer.fullName}"/></td>
+            <td><c:out value="${customer.dateOfBirth}"/></td>
             <td>
-                <c:out value="${totalMoney.gender}"/>
+                <c:out value="${customer.gender}"/>
             </td>
-            <td><c:out value="${totalMoney.identityCardNumber}"/></td>
-            <td><c:out value="${totalMoney.phoneNumber}"/></td>
-            <td><c:out value="${totalMoney.email}"/></td>
-            <td><c:out value="${totalMoney.address}"/></td>
-            <td><c:out value="${totalMoney.customerType}"/></td>
+            <td><c:out value="${customer.identityCardNumber}"/></td>
+            <td><c:out value="${customer.phoneNumber}"/></td>
+            <td><c:out value="${customer.email}"/></td>
+            <td><c:out value="${customer.address}"/></td>
+            <td><c:out value="${customer.customerType}"/></td>
         </tr>
     </c:forEach>
 
@@ -56,14 +56,14 @@
         <td>Id Card</td>
         <td>Phone</td>
     </tr>
-    <c:forEach var="totalMoney" items="${serviceAttachList}">
+    <c:forEach var="customer" items="${serviceAttachList}">
         <tr>
-            <td><c:out value="${totalMoney.attachServiceCode}"/></td>
-            <td><c:out value="${totalMoney.attachServiceName}"/></td>
-            <td><c:out value="${totalMoney.attachServiceUnit}"/></td>
-            <td><c:out value="${totalMoney.attachServiceCost}"/></td>
-            <td><c:out value="${totalMoney.attachServiceQuantity}"/></td>
-            <td><c:out value="${totalMoney.attachServiceStatus}"/></td>
+            <td><c:out value="${customer.attachServiceCode}"/></td>
+            <td><c:out value="${customer.attachServiceName}"/></td>
+            <td><c:out value="${customer.attachServiceUnit}"/></td>
+            <td><c:out value="${customer.attachServiceCost}"/></td>
+            <td><c:out value="${customer.attachServiceQuantity}"/></td>
+            <td><c:out value="${customer.attachServiceStatus}"/></td>
         </tr>
     </c:forEach>
 

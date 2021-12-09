@@ -59,23 +59,46 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="totalMoney" items="${serviceResortList}">
+    <c:forEach var="customer" items="${serviceResortList}">
         <tr>
-            <td><c:out value="${totalMoney.codeService}"/></td>
-            <td><c:out value="${totalMoney.nameService}"/></td>
-            <td><c:out value="${totalMoney.usableArea}"/></td>
-            <td><c:out value="${totalMoney.rentCost}"/></td>
-            <td><c:out value="${totalMoney.numberOfPeople}"/></td>
-            <td><c:out value="${totalMoney.serviceTypeId}"/></td>
-            <td><c:out value="${totalMoney.rentalType}"/></td>
-            <td><c:out value="${totalMoney.standardRoom}"/></td>
-            <td><c:out value="${totalMoney.descriptionOtherConvenience}"/></td>
-            <td><c:out value="${totalMoney.poolArea}"/></td>
-            <td><c:out value="${totalMoney.numberOfFloors}"/></td>
+            <td><c:out value="${customer.codeService}"/></td>
+            <td><c:out value="${customer.nameService}"/></td>
+            <td><c:out value="${customer.usableArea}"/></td>
+            <td><c:out value="${customer.rentCost}"/></td>
+            <td><c:out value="${customer.numberOfPeople}"/></td>
+            <td>
+                <c:if test="${customer.serviceTypeId == 1}">
+                    Villa
+                </c:if>
+                <c:if test="${customer.serviceTypeId == 2}">
+                    House
+                </c:if>
+                <c:if test="${customer.serviceTypeId == 3}">
+                    Room
+                </c:if>
+            </td>
+            <td>
+                <c:if test="${customer.rentalType == 1}">
+                    Year
+                </c:if>
+                <c:if test="${customer.rentalType == 2}">
+                    Month
+                </c:if>
+                <c:if test="${customer.rentalType == 3}">
+                    Day
+                </c:if>
+                <c:if test="${customer.rentalType == 4}">
+                    House
+                </c:if>
+            </td>
+            <td><c:out value="${customer.standardRoom}"/></td>
+            <td><c:out value="${customer.descriptionOtherConvenience}"/></td>
+            <td><c:out value="${customer.poolArea}"/></td>
+            <td><c:out value="${customer.numberOfFloors}"/></td>
 
 
-            <td><a href="/service_servlet?choose=edit&codeService=${totalMoney.codeService}">edit</a></td>
-            <td><a href="/service_servlet?choose=delete&codeService=${totalMoney.codeService}"
+            <td><a href="/service_servlet?choose=edit&codeService=${customer.codeService}">edit</a></td>
+            <td><a href="/service_servlet?choose=delete&codeService=${customer.codeService}"
                    onclick="return confirm('Are you sure you want to delete this item?')">delete</a></td>
         </tr>
     </c:forEach>

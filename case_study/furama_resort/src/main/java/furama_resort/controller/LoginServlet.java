@@ -17,10 +17,12 @@ import java.util.List;
 
 public class LoginServlet extends HttpServlet {
     IUserService iUserService = new UserService();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+       String save =request.getParameter("save");
 
 
         List<UserEmployee> userEmployeeList = this.iUserService.getListUser();
@@ -38,14 +40,16 @@ public class LoginServlet extends HttpServlet {
             // Save session
             request.getSession().setAttribute("usernameSession", username);
             // Save cookie
-            Cookie cookie = new Cookie("usernameCookie", username);
-            cookie.setMaxAge(3600);
+            if (save!=null){
+                Cookie cookie = new Cookie("usernameCookie", username);
+                cookie.setMaxAge(3600);
 
-            Cookie cookiePassword = new Cookie("passwordCookie", password);
-            cookiePassword.setMaxAge(3600);
+                Cookie cookiePassword = new Cookie("passwordCookie", password);
+                cookiePassword.setMaxAge(3600);
 
-            response.addCookie(cookie);
-            response.addCookie(cookiePassword);
+                response.addCookie(cookie);
+                response.addCookie(cookiePassword);
+            }
 
             response.sendRedirect("/home_servlet");
 
@@ -59,9 +63,8 @@ public class LoginServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String save = null;
-         save = request.getParameter("save");
-        if (save!=null){
+//        String save =request.getParameter("save");
+//        if (save!=null){
             Cookie[] cookies = request.getCookies();
 
             for (Cookie cookie : cookies) {
@@ -76,8 +79,9 @@ public class LoginServlet extends HttpServlet {
 
 //        response.sendRedirect("home.jsp");
             request.getRequestDispatcher("furama/login/login.jsp").forward(request, response);
-        }else {
-            request.getRequestDispatcher("furama/login/login.jsp").forward(request, response);
-        }
+//        }
+//
+//        request.getRequestDispatcher("furama/login/login.jsp").forward(request, response);
+
     }
 }

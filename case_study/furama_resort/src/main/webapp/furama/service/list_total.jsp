@@ -27,10 +27,10 @@
         <td>Total Money</td>
         <td>Name Service</td>
     </tr>
-    <c:forEach var="totalMoney" items="${totalMoneyServices}">
+    <c:forEach var="customer" items="${totalMoneyServices}">
         <tr>
-            <td><c:out value="${totalMoney.nameService}"/></td>
-            <td><c:out value="${totalMoney.totalMoneyService}"/></td>
+            <td><c:out value="${customer.nameService}"/></td>
+            <td><c:out value="${customer.totalMoneyService}"/></td>
     </c:forEach>
 
 

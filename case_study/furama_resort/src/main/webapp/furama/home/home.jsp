@@ -7,29 +7,40 @@
     <title>Title</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
+        *{
+            box-sizing: border-box;
+        }
         .login {
-            padding: 20px;
             text-align: right;
             color: blue;
+            font-weight: bold;
+            padding: 10px;
         }
 
         .header {
-            background-color: #00cec9;
+            background-color: #81ecec;
+            height: 50px;
+            margin-bottom: 10px;
         }
 
         .menu {
             background-color: #81ecec;
             height: 70px;
+
         }
+
         .page-item {
             text-align: center;
             padding: 20px;
+            font-weight: bold;
         }
 
         .content {
+            margin: 10px;
         }
+
         .sidebar-left {
-            background-color: #e7f1ff;
+            border: 2px dashed burlywood;
             width: 20%;
         }
 
@@ -38,7 +49,18 @@
         }
 
         .footer {
-            background-color: #00cec9;
+            background-color: #81ecec;
+            height: 50px;
+            padding: 25px;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: red;
         }
 
 
@@ -50,14 +72,12 @@
 <div class="container-fluid">
     <div class="row header">
         <div class="col-lg-6">
-            <img src="img/logo.jpg" height="100px" width="100px"/>
+            <img src="img/logo.jpg" height="50px" width="50px"/>
         </div>
         <div class="col-lg-6">
-            <h5 class="login">
-                <p class="login">
-                   <%=request.getSession().getAttribute("usernameSession")%>
-                </p>
-            </h5>
+            <p class="login">
+                <%=request.getSession().getAttribute("usernameSession")%>
+            </p>
         </div>
     </div>
 </div>
@@ -82,8 +102,8 @@
             <form method="post">
                 <span>
                     <input type="hidden" name="choose" value="search">
-                    <input type="text" name="nameProduct" placeholder="Search" style="width: 120px " >
-                    <input type="submit" value="Search">
+                    <input type="text" name="nameProduct" placeholder="Search" style="width: 120px ">
+                    <input class="summit" type="submit" value="Search">
                 </span>
             </form>
         </div>
@@ -92,7 +112,11 @@
 <div class="container-fluid ">
     <div class="row content">
         <div class="col-lg-6 sidebar-left">
-<%--            <span><a href="/home_servlet?choose=login">Login</a></span>--%>
+            <p><a href="#">link</a></p>
+            <p><a href="#">link</a></p>
+            <p><a href="#">link</a></p>
+            <p><a href="#">link</a></p>
+            <p><a href="#">link</a></p>
             <p><a href="#">link</a></p>
             <p><a href="#">link</a></p>
             <p><a href="#">link</a></p>
@@ -108,6 +132,12 @@
             <p><a href="#">link</a></p>
             <p><a href="#">link</a></p>
             <p><a href="#">link</a></p>
+            <p><a href="#">link</a></p>
+            <p><a href="#">link</a></p>
+            <p><a href="#">link</a></p>
+            <p><a href="#">link</a></p>
+            <p><a href="#">link</a></p>
+            <p><a href="#">link</a></p>
         </div>
     </div>
 </div>
@@ -115,7 +145,7 @@
 <div class="container-fluid ">
     <div class="row footer">
         <div class="col-lg-12">
-            <h5 >Bản quyền thuộc Mr.Duy C0821G1</h5>
+            <h5>Bản quyền thuộc Mr.Duy C0821G1</h5>
         </div>
     </div>
 </div>

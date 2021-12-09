@@ -42,20 +42,20 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach var="totalMoney" items="${contractList}">
+    <c:forEach var="customer" items="${contractList}">
         <tr>
-            <td><c:out value="${totalMoney.contractCode}"/></td>
-            <td><c:out value="${totalMoney.contractStartDate}"/></td>
-            <td><c:out value="${totalMoney.contractEndDate}"/></td>
-            <td><c:out value="${totalMoney.contractDeposit}"/></td>
-            <td><c:out value="${totalMoney.contractTotalMoney}"/></td>
-            <td><c:out value="${totalMoney.employeeCode}"/></td>
-            <td><c:out value="${totalMoney.customerCode}"/></td>
-            <td><c:out value="${totalMoney.serviceCode}"/></td>
+            <td><c:out value="${customer.contractCode}"/></td>
+            <td><c:out value="${customer.contractStartDate}"/></td>
+            <td><c:out value="${customer.contractEndDate}"/></td>
+            <td><c:out value="${customer.contractDeposit}"/></td>
+            <td><c:out value="${customer.contractTotalMoney}"/></td>
+            <td><c:out value="${customer.employeeCode}"/></td>
+            <td><c:out value="${customer.customerCode}"/></td>
+            <td><c:out value="${customer.serviceCode}"/></td>
 
 
-            <td><a href="/contract_servlet?choose=edit&contractCode=${totalMoney.contractCode}">edit</a></td>
-            <td><a href="/contract_servlet?choose=delete&contractCode=${totalMoney.contractCode}"
+            <td><a href="/contract_servlet?choose=edit&contractCode=${customer.contractCode}">edit</a></td>
+            <td><a href="/contract_servlet?choose=delete&contractCode=${customer.contractCode}"
                    onclick="return confirm('Are you sure you want to delete this item?')" >delete</a></td>
         </tr>
     </c:forEach>

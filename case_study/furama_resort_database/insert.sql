@@ -196,7 +196,7 @@ values
 
 -- select sum((attach_service.attach_service_quantity*rent_type.rent_type_cost) + service.service_cost) as contract_total_money,service.service_name
 -- from contract
---  join contract_detail on contract.contract_id = contract_detail.contract_id
+--  left join contract_detail on contract.contract_id = contract_detail.contract_id
 -- join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id
 --  join service on contract.service_id = service.service_id
 --  join rent_type on service.rent_type_id = rent_type.rent_type_id
