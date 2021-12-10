@@ -60,33 +60,30 @@
 * {
     box-sizing: border-box;
 }
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-    [class*="col-"] {
-        width: 100%;
-    }
-    #header {
-        background-color: red;
-    }
-}
 
-
-.table {
-    background-color: #20c997;
+table{
+    text-align: center;
+    background-color: blue;
     color: white;
 }
 
-.title {
-    background-color: #20c997;
+header {
+    padding: 10px;
     color: white;
+    background-color: #b6effb;
 }
-
-.msg {
-    background-color: #20c997;
+body {
+    font-family: Arial, serif;
+    margin: 0;
+}
+section {
+    margin: 5px;
+    padding: 10px;
+    background-color: lightgrey;
+}
+footer {
+    padding: 10px;
     color: white;
-}
-
-.menu {
-    background-color: #20c997;
-    margin: 10px;
+    background-color: #b6effb;
+    text-align: center;
 }

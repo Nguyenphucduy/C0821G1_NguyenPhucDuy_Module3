@@ -7,6 +7,9 @@
         *{
          box-sizing: border-box;
         }
+        body{
+            margin: 0;
+        }
         .msg {
             color: red;
             text-align: center;
