@@ -35,6 +35,13 @@ public class CustomerServlet extends HttpServlet {
             case "edit":
                 goEditData(request,response);
                 break;
+            case "delete":
+                try {
+                    deleteCustomer(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
             case "search":
                 SearchData(request,response);
                 break;
@@ -113,13 +120,13 @@ public class CustomerServlet extends HttpServlet {
             case "create":
                 goPageCreate(request, response);
                 break;
-            case "delete":
-                try {
-                    deleteCustomer(request,response);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                break;
+//            case "delete":
+//                try {
+//                    deleteCustomer(request,response);
+//                } catch (SQLException throwables) {
+//                    throwables.printStackTrace();
+//                }
+//                break;
             case "edit":
                 goPageEdit(request,response);
                 break;

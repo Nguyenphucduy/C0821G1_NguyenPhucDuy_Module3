@@ -5,7 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+<%--    <link rel="stylesheet" href="css/bootstrap.min.css">--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <style>
         *{
             box-sizing: border-box;
@@ -72,7 +74,8 @@
 <div class="container-fluid">
     <div class="row header">
         <div class="col-lg-6">
-            <img src="img/logo.jpg" height="50px" width="50px"/>
+<%--            <img src="img/logo.jpg" height="50px" width="50px"/>--%>
+            <img src="https://i.pinimg.com/280x280_RS/8c/c7/cf/8cc7cf8460083733c6e80bcdc42aeeff.jpg" height="50px" width="50px"/>
         </div>
         <div class="col-lg-6">
             <p class="login">

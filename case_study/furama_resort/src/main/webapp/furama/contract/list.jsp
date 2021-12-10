@@ -162,8 +162,15 @@
 
 
                         <td><a href="/contract_servlet?choose=edit&contractCode=${contract.contractCode}">edit</a></td>
-                        <td><a href="/contract_servlet?choose=delete&contractCode=${contract.contractCode}"
-                               onclick="return confirm('Are you sure you want to delete this item?')" >delete</a></td>
+<%--                        <td><a href="/contract_servlet?choose=delete&contractCode=${contract.contractCode}"--%>
+<%--                               onclick="return confirm('Are you sure you want to delete this item?')" >delete</a></td>--%>
+                        <td>
+                            <form action="/contract_servlet" method="post">
+                                <input type="hidden" name="choose" value="delete">
+                                <input type="hidden" name="contractCode" value="${contract.contractCode}">
+                                <input type="submit" value="delete" onclick="return confirm('Are you sure you want to delete this item?')" class="summit">
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

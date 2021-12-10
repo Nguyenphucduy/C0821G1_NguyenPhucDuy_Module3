@@ -44,6 +44,13 @@ public class EmployeeServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "delete":
+                try {
+                    deleteEmployee(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
             case "edit":
                 editEmployee(request,response);
                 break;
@@ -134,13 +141,13 @@ public class EmployeeServlet extends HttpServlet {
             case "createUser":
                 goPageCreateUser(request,response);
                 break;
-            case "delete":
-                try {
-                    deleteEmployee(request,response);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                break;
+//            case "delete":
+//                try {
+//                    deleteEmployee(request,response);
+//                } catch (SQLException throwables) {
+//                    throwables.printStackTrace();
+//                }
+//                break;
             case "edit":
                 goPageEdit(request,response);
                 break;

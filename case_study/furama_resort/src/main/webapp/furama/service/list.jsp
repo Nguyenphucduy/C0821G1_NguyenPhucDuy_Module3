@@ -155,47 +155,55 @@
                     <td>Edit</td>
                     <td>Delete</td>
                 </tr>
-                <c:forEach var="customer" items="${serviceResortList}">
+                <c:forEach var="service" items="${serviceResortList}">
                     <tr>
-                        <td><c:out value="${customer.codeService}"/></td>
-                        <td><c:out value="${customer.nameService}"/></td>
-                        <td><c:out value="${customer.usableArea}"/></td>
-                        <td><c:out value="${customer.rentCost}"/></td>
-                        <td><c:out value="${customer.numberOfPeople}"/></td>
+                        <td><c:out value="${service.codeService}"/></td>
+                        <td><c:out value="${service.nameService}"/></td>
+                        <td><c:out value="${service.usableArea}"/></td>
+                        <td><c:out value="${service.rentCost}"/></td>
+                        <td><c:out value="${service.numberOfPeople}"/></td>
                         <td>
-                            <c:if test="${customer.serviceTypeId == 1}">
+                            <c:if test="${service.serviceTypeId == 1}">
                                 Villa
                             </c:if>
-                            <c:if test="${customer.serviceTypeId == 2}">
+                            <c:if test="${service.serviceTypeId == 2}">
                                 House
                             </c:if>
-                            <c:if test="${customer.serviceTypeId == 3}">
+                            <c:if test="${service.serviceTypeId == 3}">
                                 Room
                             </c:if>
                         </td>
                         <td>
-                            <c:if test="${customer.rentalType == 1}">
+                            <c:if test="${service.rentalType == 1}">
                                 Year
                             </c:if>
-                            <c:if test="${customer.rentalType == 2}">
+                            <c:if test="${service.rentalType == 2}">
                                 Month
                             </c:if>
-                            <c:if test="${customer.rentalType == 3}">
+                            <c:if test="${service.rentalType == 3}">
                                 Day
                             </c:if>
-                            <c:if test="${customer.rentalType == 4}">
+                            <c:if test="${service.rentalType == 4}">
                                 House
                             </c:if>
                         </td>
-                        <td><c:out value="${customer.standardRoom}"/></td>
-                        <td><c:out value="${customer.descriptionOtherConvenience}"/></td>
-                        <td><c:out value="${customer.poolArea}"/></td>
-                        <td><c:out value="${customer.numberOfFloors}"/></td>
+                        <td><c:out value="${service.standardRoom}"/></td>
+                        <td><c:out value="${service.descriptionOtherConvenience}"/></td>
+                        <td><c:out value="${service.poolArea}"/></td>
+                        <td><c:out value="${service.numberOfFloors}"/></td>
 
 
-                        <td><a href="/service_servlet?choose=edit&codeService=${customer.codeService}">edit</a></td>
-                        <td><a href="/service_servlet?choose=delete&codeService=${customer.codeService}"
-                               onclick="return confirm('Are you sure you want to delete this item?')">delete</a></td>
+                        <td><a href="/service_servlet?choose=edit&codeService=${service.codeService}">edit</a></td>
+<%--                        <td><a href="/service_servlet?choose=delete&codeService=${service.codeService}"--%>
+<%--                               onclick="return confirm('Are you sure you want to delete this item?')">delete</a></td>--%>
+<%--                        <td>--%>
+                        <td>
+                            <form action="/service_servlet" method="post">
+                                <input type="hidden" name="choose" value="delete">
+                                <input type="hidden" name="codeService" value="${service.codeService}">
+                                <input type="submit" value="delete" onclick="return confirm('Are you sure you want to delete this item?')" class="summit">
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

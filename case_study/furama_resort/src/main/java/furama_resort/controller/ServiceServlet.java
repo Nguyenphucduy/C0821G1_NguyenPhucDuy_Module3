@@ -42,6 +42,13 @@ public class ServiceServlet extends HttpServlet {
             case "edit":
                 editService(request,response);
                 break;
+            case "delete":
+                try {
+                    deleteService(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
             case "search":
                 searchService(request,response);
                 break;
@@ -116,13 +123,13 @@ public class ServiceServlet extends HttpServlet {
             case "edit":
                 goPageEdit(request,response);
                 break;
-            case "delete":
-                try {
-                    deleteService(request,response);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                break;
+//            case "delete":
+//                try {
+//                    deleteService(request,response);
+//                } catch (SQLException throwables) {
+//                    throwables.printStackTrace();
+//                }
+//                break;
             case "totalMoney":
                 getListTotalMoneyService(request,response);
                 break;

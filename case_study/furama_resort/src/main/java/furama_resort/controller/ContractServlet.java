@@ -43,6 +43,13 @@ public class ContractServlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "delete":
+                try {
+                    deleteContract(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
             case "edit":
                 editContract(request,response);
                 break;
@@ -102,13 +109,13 @@ public class ContractServlet extends HttpServlet {
             case "create":
                 goPageCreate(request, response);
                 break;
-            case "delete":
-                try {
-                    deleteContract(request,response);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                break;
+//            case "delete":
+//                try {
+//                    deleteContract(request,response);
+//                } catch (SQLException throwables) {
+//                    throwables.printStackTrace();
+//                }
+//                break;
             case "edit":
                 goPageEdit(request,response);
                 break;

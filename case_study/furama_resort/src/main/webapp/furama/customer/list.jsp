@@ -176,8 +176,15 @@
                         </td>
 
                         <td><a href="/customer_servlet?choose=edit&customerCode=${customer.customerCode}">edit</a></td>
-                        <td><a href="/customer_servlet?choose=delete&customerCode=${customer.customerCode}"
-                               onclick="return confirm('Are you sure you want to delete this item?')">delete</a></td>
+<%--                        <td><a href="/customer_servlet?choose=delete&customerCode=${customer.customerCode}"--%>
+<%--                               onclick="return confirm('Are you sure you want to delete this item?')">delete</a></td>--%>
+                        <td>
+                            <form action="/customer_servlet" method="post">
+                                <input type="hidden" name="choose" value="delete">
+                                <input type="hidden" name="customerCode" value="${customer.customerCode}">
+                                <input type="submit" value="delete" onclick="return confirm('Are you sure you want to delete this item?')" class="summit">
+                            </form>
+                        </td>
 
                     </tr>
                 </c:forEach>
